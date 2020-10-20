@@ -29,7 +29,18 @@ function addHost() {
 }
 
 function addHub() {
-	console.log("new hub");
+	var hubName = null;
+
+	while(hubName == null || hubName == "")
+	{
+		hubName = prompt("Please name the new hub", "unnamed_hub");
+	}
+
+	// Create a new hub instance with the name
+
+
+	// Add the new hub instance to the sandbox
+
 }
 
 function addSwitch() {
