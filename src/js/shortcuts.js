@@ -44,5 +44,16 @@ function addHub() {
 }
 
 function addSwitch() {
-	console.log("new switch");
+	var switchName = null;
+
+	while(switchName == null || switchName == "")
+	{
+		switchName = prompt("Please name the new switch", "unnamed_switch");
+	}
+
+	// Create a new switch instance with the name
+
+
+	// Add the new switch instance to the sandbox
+
 }
