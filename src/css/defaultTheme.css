@@ -1,4 +1,13 @@
+html {
+	height: 100%;
+	margin: 0px;
+}
+
 body {
 	height: 100%;
 	background-color: WhiteSmoke;
+}
+
+#sandbox {
+	border-style: dashed;
 }
