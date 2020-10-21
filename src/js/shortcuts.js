@@ -1,5 +1,5 @@
 // Define shortcuts' behaviour
-var sandboxDiv = $( "#sanbox" );
+var sandboxDiv = $( "#sandbox" );
 
 var shortcutAddHost = $( "#shortcutAddHost" );
 var shortcutAddHub = $( "#shortcutAddHub" );
