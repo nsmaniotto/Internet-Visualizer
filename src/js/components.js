@@ -6,4 +6,12 @@ class Host {
 
 		// Add mask
 	}
-}	
+}
+
+class Hub {
+	constructor(name) {
+		this.name = name;
+
+		// Add links
+	}
+}
