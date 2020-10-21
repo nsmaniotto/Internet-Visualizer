@@ -11,3 +11,13 @@ body {
 #sandbox {
 	border-style: dashed;
 }
+
+/* COMPONENTS */
+
+.hostTable {
+
+}
+
+.component td {
+	border: solid 2px lightgrey;
+}

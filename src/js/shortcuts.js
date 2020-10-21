@@ -12,7 +12,6 @@ shortcutAddHub.click(function() { addHub() });
 shortcutAddSwitch.click(function() { addSwitch() });
 
 function addHost() {
-	console.log("new host");
 	// Ask for the host name
 	var hostName = null;
 
@@ -22,10 +21,10 @@ function addHost() {
 	}
 
 	// Create a new host instance with the name
-
+	var newHost = new Host(hostName);
 
 	// Add the new host instance to the sandbox
-
+	sandboxDiv.append(newHost.html);
 }
 
 function addHub() {

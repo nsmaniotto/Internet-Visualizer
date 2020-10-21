@@ -9,6 +9,27 @@ class Host {
 		// Add mask
 
 		// Add interfaces
+
+		// Generate HTML
+		this.html = this.generateHTML();
+	}
+
+	generateHTML() {
+		var table = $('<table/>', {
+	        'class': 'component hostTable'
+	    });
+
+		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+
+		table.append( '<tbody>' );
+
+		for(var i = 1; i < 4; i++) {
+		    table.append( '<tr><td>' + 'layer ' +  i + '</td></tr>' );
+		}
+
+		table.append( '</tbody>' );
+
+		$('#sandbox').append(table);
 	}
 }
 
