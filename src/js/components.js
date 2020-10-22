@@ -63,5 +63,24 @@ class Switch {
 		this.name = name;
 
 		// Add ports
+		this.html = this.generateHTML();
+	}
+
+	generateHTML() {
+		var table = $('<table/>', {
+	        'class': 'component switchTable'
+	    });
+
+		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+
+		table.append( '<tbody>' );
+
+		for(var i = 1; i < 3; i++) {
+		    table.append( '<tr class="layer"><td> </td></tr>' );
+		}
+
+		table.append( '</tbody>' );
+
+		$('#sandbox').append(table);
 	}
 }

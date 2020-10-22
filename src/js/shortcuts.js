@@ -51,8 +51,8 @@ function addSwitch() {
 	}
 
 	// Create a new switch instance with the name
-
+	var newSwitch = new Switch(switchName);
 
 	// Add the new switch instance to the sandbox
-
+	sandboxDiv.append(newSwitch.html);
 }
