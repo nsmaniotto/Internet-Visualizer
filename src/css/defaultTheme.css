@@ -18,6 +18,15 @@ body {
 
 }
 
+.component thead td {
+	height: 40px;
+	font-weight: bold;
+}
+
 .component td {
 	border: solid 2px lightgrey;
+}
+
+.component .layer {
+	height: 30px;
 }

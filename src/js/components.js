@@ -24,7 +24,7 @@ class Host {
 		table.append( '<tbody>' );
 
 		for(var i = 1; i < 4; i++) {
-		    table.append( '<tr><td>' + 'layer ' +  i + '</td></tr>' );
+		    table.append( '<tr class="layer"><td> </td></tr>' );
 		}
 
 		table.append( '</tbody>' );
