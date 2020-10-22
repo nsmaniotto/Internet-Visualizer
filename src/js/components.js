@@ -38,6 +38,23 @@ class Hub {
 		this.name = name;
 
 		// Add links
+
+		// Generate HTML
+		this.html = this.generateHTML();
+	}
+
+	generateHTML() {
+		var table = $('<table/>', {
+	        'class': 'component hubTable'
+	    });
+
+		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+
+		table.append( '<tbody>' );
+
+		table.append( '</tbody>' );
+
+		$('#sandbox').append(table);
 	}
 }
 

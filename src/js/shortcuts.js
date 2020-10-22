@@ -36,10 +36,10 @@ function addHub() {
 	}
 
 	// Create a new hub instance with the name
-
+	var newHub = new Hub(hubName);
 
 	// Add the new hub instance to the sandbox
-
+	sandboxDiv.append(newHub.html);
 }
 
 function addSwitch() {
