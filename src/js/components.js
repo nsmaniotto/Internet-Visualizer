@@ -26,6 +26,11 @@ class Component {
 				break;
 
 			case "switch":
+				this.layers.push("data link layer");
+				this.layers.push("physical layer");
+				break;
+
+			case "router":
 				this.layers.push("internet layer");
 				this.layers.push("data link layer");
 				this.layers.push("physical layer");
@@ -82,6 +87,18 @@ class Hub extends Component {
 class Switch extends Component {
 	constructor(name) {
 		super("switch");
+
+		this.name = name;
+
+		this.initLayers();
+
+		this.generateHTML();
+	}
+}
+
+class Router extends Component {
+	constructor(name) {
+		super("router");
 
 		this.name = name;
 
