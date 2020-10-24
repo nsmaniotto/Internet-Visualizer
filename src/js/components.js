@@ -16,7 +16,7 @@ class Host {
 
 	generateHTML() {
 		var table = $('<table/>', {
-	        'class': 'component hostTable'
+	        'class': 'component hostTable d-inline-block'
 	    });
 
 		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
@@ -45,7 +45,7 @@ class Hub {
 
 	generateHTML() {
 		var table = $('<table/>', {
-	        'class': 'component hubTable'
+	        'class': 'component hubTable d-inline-block'
 	    });
 
 		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
@@ -68,7 +68,7 @@ class Switch {
 
 	generateHTML() {
 		var table = $('<table/>', {
-	        'class': 'component switchTable'
+	        'class': 'component switchTable d-inline-block'
 	    });
 
 		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
