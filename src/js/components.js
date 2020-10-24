@@ -5,10 +5,6 @@ $('.component').draggable({
 	cursor: "move"
 });
 
-$('#draggable-containment').draggable({
-  containment: '.draggable-container',
-});
-
 class Host {
 	constructor(name) {
 		this.name = name;

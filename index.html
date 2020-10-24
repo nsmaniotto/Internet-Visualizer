@@ -6,8 +6,8 @@
 	    <link id="defaultTheme" rel="stylesheet" href="src/css/defaultTheme.css">
   	</head>
 
-  	<body class="container-fluid d-flex flex-column">
-  		<div class="navbarDiv">
+  	<body class="container-fluid">
+  		<div id="navbarDiv">
   			<nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
 				<a class="navbar-brand" href="#">Internet-Visualizer</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,8 +37,9 @@
 			</nav>
   		</div>
 
-  		<div id="sandbox" class="draggable-container d-flex flex-grow-1 align-items-stretch d-inline-block">
-  			<div class="component">test</div>
+  		<div id="sandbox">
+  			<div class="component d-inline-block">test</div>
+  		</div>
   </body>
 
   	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -50,6 +51,8 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
   	<script type="text/javascript" src="src/js/shortcuts.js"></script>
+
+  	<script type="text/javascript" src="src/js/sandbox.js"></script>
 
   	<script type="text/javascript" src="src/js/components.js"></script>
 
