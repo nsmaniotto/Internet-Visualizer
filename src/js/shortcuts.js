@@ -4,12 +4,15 @@ var sandboxDiv = $( "#sandbox" );
 var shortcutAddHost = $( "#shortcutAddHost" );
 var shortcutAddHub = $( "#shortcutAddHub" );
 var shortcutAddSwitch = $( "#shortcutAddSwitch" );
+var shortcutAddRouter = $( "#shortcutAddRouter" );
 
 shortcutAddHost.click(function() { addHost() });
 
 shortcutAddHub.click(function() { addHub() });
 
 shortcutAddSwitch.click(function() { addSwitch() });
+
+shortcutAddRouter.click(function() { addRouter() });
 
 function addHost() {
 	// Ask for the host name
@@ -46,4 +49,16 @@ function addSwitch() {
 
 	// Create a new switch instance with the name
 	var newSwitch = new Switch(switchName);
+}
+
+function addRouter() {
+	var routerName = null;
+
+	while(routerName == null || routerName == "")
+	{
+		routerName = prompt("Please name the new router", "unnamed_router");
+	}
+
+	// Create a new switch instance with the name
+	var newRouter = new Router(routerName);
 }
