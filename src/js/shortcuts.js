@@ -22,9 +22,6 @@ function addHost() {
 
 	// Create a new host instance with the name
 	var newHost = new Host(hostName);
-
-	// Add the new host instance to the sandbox
-	sandboxDiv.append(newHost.html);
 }
 
 function addHub() {
@@ -37,9 +34,6 @@ function addHub() {
 
 	// Create a new hub instance with the name
 	var newHub = new Hub(hubName);
-
-	// Add the new hub instance to the sandbox
-	sandboxDiv.append(newHub.html);
 }
 
 function addSwitch() {
@@ -52,7 +46,4 @@ function addSwitch() {
 
 	// Create a new switch instance with the name
 	var newSwitch = new Switch(switchName);
-
-	// Add the new switch instance to the sandbox
-	sandboxDiv.append(newSwitch.html);
 }
