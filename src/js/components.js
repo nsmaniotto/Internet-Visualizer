@@ -1,4 +1,12 @@
 // Make all the components draggable
+function makeComponentDraggable(component) {
+	component.draggable({
+		containment: "#sandbox",
+		scroll: false,
+		cursor: "move"
+	});
+}
+
 $('.component').draggable({
 	containment: "#sandbox",
 	scroll: false,
@@ -37,6 +45,8 @@ class Host {
 		table.append( '</tbody>' );
 
 		$('#sandbox').append(table);
+
+		makeComponentDraggable(table);
 	}
 }
 
@@ -62,6 +72,8 @@ class Hub {
 		table.append( '</tbody>' );
 
 		$('#sandbox').append(table);
+
+		makeComponentDraggable(table);
 	}
 }
 
@@ -89,5 +101,7 @@ class Switch {
 		table.append( '</tbody>' );
 
 		$('#sandbox').append(table);
+
+		makeComponentDraggable(table);
 	}
 }
