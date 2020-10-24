@@ -1,3 +1,10 @@
+// Make all the components draggable
+$('.component').draggable({
+	containment: "#sandbox",
+	scroll: false,
+	cursor: "move"
+});
+
 class Host {
 	constructor(name) {
 		this.name = name;
