@@ -1,4 +1,3 @@
-// Make all the components draggable
 function makeComponentDraggable(component) {
 	component.draggable({
 		containment: "#sandbox",
@@ -7,101 +6,87 @@ function makeComponentDraggable(component) {
 	});
 }
 
-$('.component').draggable({
-	containment: "#sandbox",
-	scroll: false,
-	cursor: "move"
-});
+class Component {
+	constructor(componentType) {
+		this.type = componentType;
+		this.name = "unnamed_" + this.type;
+		this.layers = new Array();
+		this.interfaces = new Array();
+		this.html = null;
+	}
 
-class Host {
-	constructor(name) {
-		this.name = name;
+	initLayers() {
+		switch(this.type) {
+			case "host":
+				this.layers.push("application layer");
+				this.layers.push("transport layer");
+				this.layers.push("internet layer");
+				this.layers.push("data link layer");
+				this.layers.push("physical layer");
+				break;
 
-		// Physical address
-		
-		// Add IP address
+			case "switch":
+				this.layers.push("internet layer");
+				this.layers.push("data link layer");
+				this.layers.push("physical layer");
+				break;
 
-		// Add mask
-
-		// Add interfaces
-
-		// Generate HTML
-		this.html = this.generateHTML();
+			default:
+				break;
+		}
 	}
 
 	generateHTML() {
-		var table = $('<table/>', {
-	        'class': 'component hostTable d-inline-block'
+		this.html = $('<table/>', {
+	        'class': 'component ' + this.type + ' d-inline-block'
 	    });
 
-		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+		this.html.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
 
-		table.append( '<tbody>' );
+		this.html.append( '<tbody>' );
 
-		for(var i = 1; i < 4; i++) {
-		    table.append( '<tr class="layer"><td> </td></tr>' );
-		}
+	    this.layers.forEach(layerName => this.html.append( '<tr class="layer"><td> ' + layerName + ' </td></tr>' ));
 
-		table.append( '</tbody>' );
+		this.html.append( '</tbody>' );
 
-		$('#sandbox').append(table);
+		$('#sandbox').append(this.html);
 
-		makeComponentDraggable(table);
+		makeComponentDraggable(this.html);
 	}
 }
 
-class Hub {
+class Host extends Component {
 	constructor(name) {
+		super("host");
+
 		this.name = name;
 
-		// Add links
+		this.initLayers();
 
-		// Generate HTML
-		this.html = this.generateHTML();
-	}
-
-	generateHTML() {
-		var table = $('<table/>', {
-	        'class': 'component hubTable d-inline-block'
-	    });
-
-		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
-
-		table.append( '<tbody>' );
-
-		table.append( '</tbody>' );
-
-		$('#sandbox').append(table);
-
-		makeComponentDraggable(table);
+		this.generateHTML();
 	}
 }
 
-class Switch {
+class Hub extends Component {
 	constructor(name) {
+		super("Hub");
+
 		this.name = name;
 
-		// Add ports
-		this.html = this.generateHTML();
+		this.initLayers();
+
+		this.generateHTML();
 	}
+}
 
-	generateHTML() {
-		var table = $('<table/>', {
-	        'class': 'component switchTable d-inline-block'
-	    });
+class Switch extends Component {
+	constructor(name) {
+		super("switch");
 
-		table.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+		this.name = name;
 
-		table.append( '<tbody>' );
+		this.initLayers();
 
-		for(var i = 1; i < 3; i++) {
-		    table.append( '<tr class="layer"><td> </td></tr>' );
-		}
-
-		table.append( '</tbody>' );
-
-		$('#sandbox').append(table);
-
-		makeComponentDraggable(table);
+		this.generateHTML();
 	}
 }
