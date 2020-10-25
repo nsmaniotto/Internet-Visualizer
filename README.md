@@ -1,5 +1,5 @@
 
-# Internet-Visualizer v1.0
+# Internet-Visualizer v1.0.0
 
 
 The goal of this web application is to illustrate how networks work by gradually implementing features such as layers and protocols.
