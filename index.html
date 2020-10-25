@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+  	<head>
+    	<title>Internet Visualizer</title>
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	    <link id="defaultTheme" rel="stylesheet" href="src/css/defaultTheme.css">
+  	</head>
+
+  	<body class="container-fluid">
+  		<div id="navbarDiv">
+  			<nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">Internet-Visualizer</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="navbar-brand" target="_blank" href="https://github.com/nsmaniotto/Internet-Visualizer/">
+								<img src="https://cdn0.iconfinder.com/data/icons/octicons/1024/mark-github-512.png" width="30" height="30" alt="GitHub" title="See on GitHub!">
+							</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav mr-auto shortcuts">
+						<li class="nav-item nav-link shortcut">
+							<button id="shortcutAddHost" type="button" class="btn btn-secondary">Add host</button>
+						</li>
+						<li class="nav-item nav-link shortcut">
+							<button id="shortcutAddHub" type="button" class="btn btn-secondary">Add hub</button>
+						</li>
+						<li class="nav-item nav-link shortcut">
+							<button id="shortcutAddSwitch" type="button" class="btn btn-secondary">Add switch</button>
+						</li>
+						<li class="nav-item nav-link shortcut">
+							<button id="shortcutAddRouter" type="button" class="btn btn-secondary">Add router</button>
+						</li>
+					</ul>
+				</div>
+			</nav>
+  		</div>
+
+  		<div id="sandbox">
+  			
+  		</div>
+  </body>
+
+  	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Also include jQueryUI -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+  	<script type="text/javascript" src="src/js/shortcuts.js"></script>
+
+  	<script type="text/javascript" src="src/js/sandbox.js"></script>
+
+  	<script type="text/javascript" src="src/js/components.js"></script>
+
+</html>
