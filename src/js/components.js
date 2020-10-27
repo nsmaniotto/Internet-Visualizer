@@ -18,22 +18,22 @@ class Component {
 	initLayers() {
 		switch(this.type) {
 			case "host":
-				this.layers.push("application layer");
-				this.layers.push("transport layer");
-				this.layers.push("internet layer");
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new ApplicationLayer());
+				this.layers.push(new TransportLayer());
+				this.layers.push(new NetworkLayer());
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			case "switch":
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			case "router":
-				this.layers.push("internet layer");
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new NetworkLayer());
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			default:
@@ -42,17 +42,13 @@ class Component {
 	}
 
 	generateHTML() {
-		this.html = $('<table/>', {
+		this.html = $('<div/>', {
 	        'class': 'component ' + this.type + ' d-inline-block'
 	    });
 
-		this.html.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+	    this.html.append( '<div class="row"><div class="col componentName">' + this.name + '</div></div>' );
 
-		this.html.append( '<tbody>' );
-
-	    this.layers.forEach(layerName => this.html.append( '<tr class="layer"><td> ' + layerName + ' </td></tr>' ));
-
-		this.html.append( '</tbody>' );
+		this.layers.forEach(layer => this.html.append( layer.html ));
 
 		$('#sandbox').append(this.html);
 
