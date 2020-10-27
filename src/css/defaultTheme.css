@@ -13,19 +13,24 @@ body {
 
 /* COMPONENTS */
 
-.hostTable {
-
+.component {
+	padding: 0px;
+	border-top: solid 2px lightgrey;
+	border-left: solid 2px lightgrey;
+	border-right: solid 2px lightgrey;
 }
 
-.component thead td {
+.component .row {
+	margin: 0px;
+	text-align: center;
+}
+
+.component .col {
+	margin: 0px;
+	border-bottom: solid 2px lightgrey;
+}
+
+.component .componentName {
 	height: 40px;
 	font-weight: bold;
-}
-
-.component td {
-	border: solid 2px lightgrey;
-}
-
-.component .layer {
-	height: 30px;
 }
