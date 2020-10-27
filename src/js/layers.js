@@ -40,9 +40,6 @@ class TransportLayer extends Layer {
 	constructor() {
 		super("transport");
 
-		this.addProtocol("TCP");
-		this.addProtocol("UDP");
-
 		this.generateHTML();
 	}
 }
