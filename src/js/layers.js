@@ -23,7 +23,7 @@ class Layer {
 	    if(this.protocols.length == 0) {
 	    	this.html.append( '<div class="col emptyLayer">' + this.type + ' layer</div>' )
 	    } else {
-	    	this.protocols.forEach(protocol => this.html.append( '<div class="col protocol">' + protocol + '</div>' ));	
+	    	this.protocols.forEach(protocol => this.html.append( protocol.html ));	
 	    }
 	}
 }
