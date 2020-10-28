@@ -1,10 +1,24 @@
 class Protocol {
-	constructor(protocolType, associatedLayer) {
+	constructor(protocolType) {
 		this.type = protocolType;
 
-		this.layer = associatedLayer;
+		this.layer = null;
 
 		this.html = null;
+
+		switch(this.type) {
+			case "TCP":
+			case "UDP":
+				this.layer = "transport";
+				break;
+			case "IP":
+			case "ARP":
+				this.layer = "network";
+				break;
+
+			default:
+				break;
+		}
 	}
 
 	generateHTML() {
@@ -14,11 +28,21 @@ class Protocol {
 	    
 	    this.html.append( this.type );
 	}
+
+	encapsulate(message) {
+		var data = {
+		  'head': {'layer':this.layer, 'protocol': this.type}, 
+		  'encapsulate': message,
+		  'tail': null
+		};
+
+		return data;
+	}
 }
 
 class TCP extends Protocol {
 	constructor() {
-		super("TCP", "transport");
+		super("TCP");
 
 		this.generateHTML();
 	}
@@ -26,7 +50,7 @@ class TCP extends Protocol {
 
 class UDP extends Protocol {
 	constructor() {
-		super("UDP", "transport");
+		super("UDP");
 
 		this.generateHTML();
 	}
@@ -34,7 +58,7 @@ class UDP extends Protocol {
 
 class IP extends Protocol {
 	constructor() {
-		super("IP", "network");
+		super("IP");
 
 		this.generateHTML();
 	}
@@ -42,7 +66,7 @@ class IP extends Protocol {
 
 class ARP extends Protocol {
 	constructor() {
-		super("ARP", "network");
+		super("ARP");
 
 		this.generateHTML();
 	}
