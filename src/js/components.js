@@ -54,6 +54,17 @@ class Component {
 
 		makeComponentDraggable(this.html);
 	}
+
+	generateData() {
+		var data = "message";
+
+		this.layers.forEach((layer, index, array) => {
+		    data = layer.encapsulate(data);
+		    console.log(data);
+		});
+
+		return data;
+	}
 }
 
 class Host extends Component {
@@ -63,6 +74,8 @@ class Host extends Component {
 		this.name = name;
 
 		this.initLayers();
+
+		this.generateData();
 
 		this.generateHTML();
 	}
