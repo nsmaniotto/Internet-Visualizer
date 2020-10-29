@@ -16,13 +16,13 @@ body {
 .component {
 	padding: 0px;
 	border-top: solid 2px lightgrey;
-	border-left: solid 2px lightgrey;
-	border-right: solid 2px lightgrey;
 }
 
 .component .row {
 	margin: 0px;
 	text-align: center;
+	border-left: solid 2px lightgrey;
+	border-right: solid 2px lightgrey;
 }
 
 .component .col {
@@ -33,4 +33,12 @@ body {
 .component .componentName {
 	height: 40px;
 	font-weight: bold;
+}
+
+.component .interfaces {
+	border: 0;
+}
+
+.component .interface {
+	border: 0;
 }
