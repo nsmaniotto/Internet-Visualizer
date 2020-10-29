@@ -36,17 +36,21 @@ function makeInterfaceClickable(interfaceReference) {
 }
 
 function drawLink(interfaceReference) {
-	var link1 = '#' + interfaceReference.link1;
-	var link2 = '#' + interfaceReference.link2.link1;
+	if(interfaceReference.link2 != null) {
+		var link1 = '#' + interfaceReference.link1;
+		var link2 = '#' + interfaceReference.link2.link1;
 
-	$().connections({ from: link1, to: link2 });
+		$().connections({ from: link1, to: link2 });
+	}
 }
 
 function deleteLink(interfaceReference) {
-	var link1 = '#' + interfaceReference.link1;
-	var link2 = '#' + interfaceReference.link2.link1;
+	if(interfaceReference.link2 != null) {
+		var link1 = '#' + interfaceReference.link1;
+		var link2 = '#' + interfaceReference.link2.link1;
 
-	$(link1).connections('remove');
+		$(link1).connections('remove');
+	}
 }
 
 class Interface {
@@ -78,5 +82,12 @@ class Interface {
 	    });
 
 	    this.html.append( this.name );
+	}
+
+	redrawLink() {
+		if(this.link2 != null) {
+			deleteLink(this);
+			drawLink(this);
+		}
 	}
 }

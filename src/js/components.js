@@ -1,9 +1,16 @@
 function makeComponentDraggable(component) {
-	component.draggable({
+	component.html.draggable({
 		containment: "#sandbox",
 		scroll: false,
-		cursor: "move"
-	});
+		cursor: "move",
+		drag: function() {
+			redrawLinks(component);
+		}
+  	});
+}
+
+function redrawLinks(component) {
+	component.interfaces.forEach(interf => interf.redrawLink() );
 }
 
 class Component {
@@ -98,7 +105,7 @@ class Component {
 
 		$('#sandbox').append(this.html);
 
-		makeComponentDraggable(this.html);
+		makeComponentDraggable(this);
 	}
 
 	generateData() {
