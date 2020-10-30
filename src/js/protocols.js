@@ -1,6 +1,21 @@
+var protocolsCounter = 0;
+
+function makeProtocolDraggable(protocol) {
+	protocol.html.draggable({
+		containment: "#sandbox",
+		scroll: false,
+		cursor: "move",
+		stop: function() {
+			protocol.html.remove();
+		}
+	});
+}
+
 class Protocol {
 	constructor(protocolType) {
 		this.type = protocolType;
+
+		this.id = this.generateProtocolId();
 
 		this.layer = null;
 
@@ -21,12 +36,23 @@ class Protocol {
 		}
 	}
 
+	generateProtocolId() {
+		var newProtocolId = this.type + protocolsCounter;
+
+		protocolsCounter++;
+
+		return newProtocolId;
+	}
+
 	generateHTML() {
 		this.html = $('<div/>', {
-	        'class': 'col protocol ' + this.type + 'Protocol'
+			'id': this.id,
+	        'class': 'col protocol ' + this.type + 'Protocol d-inline-block'
 	    });
 	    
 	    this.html.append( this.type );
+
+		makeProtocolDraggable(this);
 	}
 
 	encapsulate(message) {
