@@ -1,9 +1,16 @@
 function makeComponentDraggable(component) {
-	component.draggable({
+	component.html.draggable({
 		containment: "#sandbox",
 		scroll: false,
-		cursor: "move"
-	});
+		cursor: "move",
+		drag: function() {
+			redrawLinks(component);
+		}
+  	});
+}
+
+function redrawLinks(component) {
+	component.interfaces.forEach(interf => interf.redrawLink() );
 }
 
 class Component {
@@ -15,25 +22,30 @@ class Component {
 		this.html = null;
 	}
 
+	init() {
+		this.initLayers();
+		this.initInterfaces();
+	}
+
 	initLayers() {
 		switch(this.type) {
 			case "host":
-				this.layers.push("application layer");
-				this.layers.push("transport layer");
-				this.layers.push("internet layer");
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new ApplicationLayer());
+				this.layers.push(new TransportLayer());
+				this.layers.push(new NetworkLayer());
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			case "switch":
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			case "router":
-				this.layers.push("internet layer");
-				this.layers.push("data link layer");
-				this.layers.push("physical layer");
+				this.layers.push(new NetworkLayer());
+				this.layers.push(new DataLinkLayer());
+				this.layers.push(new PhysicalLayer());
 				break;
 
 			default:
@@ -41,22 +53,69 @@ class Component {
 		}
 	}
 
+	initInterfaces() {
+		switch(this.type) {
+			case "host":
+				this.addInterface(new Interface("eth0"));
+				break;
+
+			case "hub":
+				this.addInterface(new Interface("eth0"));
+				this.addInterface(new Interface("eth1"));
+				this.addInterface(new Interface("eth2"));
+				break;
+
+			case "switch":
+				this.addInterface(new Interface("eth0"));
+				this.addInterface(new Interface("eth1"));
+				this.addInterface(new Interface("eth2"));
+				break;
+
+			case "router":
+				this.addInterface(new Interface("eth0"));
+				this.addInterface(new Interface("eth1"));
+				this.addInterface(new Interface("eth2"));
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	addInterface(newInterface) { // 'interface' keyword is forbidden
+		this.interfaces.push(newInterface);
+	}
+
 	generateHTML() {
-		this.html = $('<table/>', {
+		this.html = $('<div/>', {
 	        'class': 'component ' + this.type + ' d-inline-block'
 	    });
 
-		this.html.append( '<thead><tr><td>' + this.name + '</td></tr></thead>' );
+	    this.html.append( '<div class="row"><div class="col componentName">' + this.name + '</div></div>' );
 
-		this.html.append( '<tbody>' );
+		this.layers.forEach(layer => this.html.append( layer.html ));
 
-	    this.layers.forEach(layerName => this.html.append( '<tr class="layer"><td> ' + layerName + ' </td></tr>' ));
+		var interfacesHTML = $('<div/>', {
+	        'class': 'row interfaces'
+	    });
 
-		this.html.append( '</tbody>' );
+		this.interfaces.forEach(interf => interfacesHTML.append( interf.html ));
+
+		this.html.append( interfacesHTML );
 
 		$('#sandbox').append(this.html);
 
-		makeComponentDraggable(this.html);
+		makeComponentDraggable(this);
+	}
+
+	generateData() {
+		var data = "message";
+
+		this.layers.forEach((layer, index, array) => {
+		    data = layer.encapsulate(data);
+		});
+
+		return data;
 	}
 }
 
@@ -66,7 +125,9 @@ class Host extends Component {
 
 		this.name = name;
 
-		this.initLayers();
+		this.init();
+
+		this.generateData();
 
 		this.generateHTML();
 	}
@@ -74,11 +135,11 @@ class Host extends Component {
 
 class Hub extends Component {
 	constructor(name) {
-		super("Hub");
+		super("hub");
 
 		this.name = name;
 
-		this.initLayers();
+		this.init();
 
 		this.generateHTML();
 	}
@@ -90,7 +151,7 @@ class Switch extends Component {
 
 		this.name = name;
 
-		this.initLayers();
+		this.init();
 
 		this.generateHTML();
 	}
@@ -102,7 +163,7 @@ class Router extends Component {
 
 		this.name = name;
 
-		this.initLayers();
+		this.init();
 
 		this.generateHTML();
 	}

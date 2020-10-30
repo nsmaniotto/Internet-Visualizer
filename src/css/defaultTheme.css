@@ -11,21 +11,41 @@ body {
 	border-style: dashed;
 }
 
-/* COMPONENTS */
+/* SHORTCUTS */
 
-.hostTable {
-
+/* Protocols */
+.shortcut .protocol {
+	background-color: grey;
 }
 
-.component thead td {
+/* COMPONENTS */
+
+.component {
+	padding: 0px;
+	border-top: solid 2px lightgrey;
+}
+
+.component .row {
+	margin: 0px;
+	text-align: center;
+	border-left: solid 2px lightgrey;
+	border-right: solid 2px lightgrey;
+}
+
+.component .col {
+	margin: 0px;
+	border-bottom: solid 2px lightgrey;
+}
+
+.component .componentName {
 	height: 40px;
 	font-weight: bold;
 }
 
-.component td {
-	border: solid 2px lightgrey;
+.component .interfaces {
+	border: 0;
 }
 
-.component .layer {
-	height: 30px;
+.component .interface {
+	border: 0;
 }
