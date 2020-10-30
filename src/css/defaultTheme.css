@@ -11,6 +11,13 @@ body {
 	border-style: dashed;
 }
 
+/* SHORTCUTS */
+
+/* Protocols */
+.shortcut .protocol {
+	background-color: grey;
+}
+
 /* COMPONENTS */
 
 .component {

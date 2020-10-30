@@ -62,3 +62,52 @@ function addRouter() {
 	// Create a new switch instance with the name
 	var newRouter = new Router(routerName);
 }
+
+function createProtocolShortcuts() {
+	createTCPShortcut();
+	createIPShortcut();
+}
+
+function createTCPShortcut () {
+	var tempProtocolHTML = $('<div/>', {
+	        'class': 'shortcut protocol TCPProtocol d-inline-block'
+	    });
+
+	tempProtocolHTML.append("TCP");
+
+	tempProtocolHTML.draggable({
+		revert: "invalid",
+		containment: "#sandbox",
+		scroll: false,
+		cursor: "move",
+		start: createTCPShortcut,
+		stop: function() {
+			tempProtocolHTML.remove();
+		}
+	});
+
+	$('#shortcutAddProtocolTCP').append(tempProtocolHTML);
+}
+
+function createIPShortcut () {
+	var tempProtocolHTML = $('<div/>', {
+	        'class': 'shortcut protocol IPProtocol d-inline-block'
+	    });
+
+	tempProtocolHTML.append("IP");
+
+	tempProtocolHTML.draggable({
+		revert: "invalid",
+		containment: "#sandbox",
+		scroll: false,
+		cursor: "move",
+		start: createIPShortcut,
+		stop: function() {
+			tempProtocolHTML.remove();
+		}
+	});
+
+	$('#shortcutAddProtocolIP').append(tempProtocolHTML);
+}
+
+createProtocolShortcuts();
