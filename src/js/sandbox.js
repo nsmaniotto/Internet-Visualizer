@@ -1,4 +1,8 @@
- function sandboxResize() {
+$('#sandbox').droppable({
+	accept: ".component"
+});
+
+function sandboxResize() {
  	//var htmlHeight = $('html').height();
  	//var htmlWidth = $('html').width();
  	
