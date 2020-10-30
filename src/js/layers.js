@@ -1,3 +1,45 @@
+function makeLayerDroppable(layer) {
+	layer.html.droppable({
+		accept: ".protocol",
+		drop: function(event, ui) {
+	    	var newProtocol = null;
+
+	        if(ui.draggable.hasClass('IPProtocol'))
+	        {
+	        	newProtocol = new IP();
+	        } else if(ui.draggable.hasClass('TCPProtocol'))
+	        {
+	        	newProtocol = new TCP();
+	        }
+
+	        if(newProtocol != null) {
+	        	if(newProtocol.layer == layer.type) {
+	        		layer.addProtocol(newProtocol);
+	        	} else {
+	        		// Wrong layer
+	        	}
+	        }
+	    },
+	    out: function(event, ui) {
+	    	var protocolLayerType = null;
+
+	        if(ui.draggable.hasClass('IPProtocol'))
+	        {
+	        	protocolLayerType = "network";
+	        } else if(ui.draggable.hasClass('TCPProtocol'))
+	        {
+	        	protocolLayerType = "transport";
+	        }
+
+	        if(protocolLayerType != null) {
+	        	if(protocolLayerType == layer.type) {
+	        		layer.removeProtocolByHTML(ui.draggable);
+	        	}
+	        }
+	    }
+	});
+}
+
 class Layer {
 	constructor(layerType) {
 		this.type = layerType;
@@ -31,11 +73,43 @@ class Layer {
 	}
 
 	addProtocol(protocol) {
-		this.protocols.push(protocol);
+		var alreadyExists = false;
+
+		if(this.protocols.length == 0) {
+			this.html.find( '.emptyLayer' ).remove();
+		} else {
+			if((this.protocols.find(existingProtocol => existingProtocol.type == protocol.type)) != null) {
+				alreadyExists = true;
+			}
+		}
+		
+		if(!alreadyExists) {
+			this.html.append(protocol.html);
+
+			this.protocols.push(protocol);
+		}
 	}
 
-	removeProtocol() {
-		
+	removeProtocol(protocol) {
+		// Find related protocol index in the protocols array
+		var foundProtocolIndex = this.protocols.indexOf(protocol);
+
+		// Remove protocol from array
+		this.protocols.splice(foundProtocolIndex, 1);
+
+		// Regenerate default description if layer is empty
+		if(this.protocols.length == 0) {
+			this.html.append( '<div class="col emptyLayer">' + this.type + ' layer</div>' );
+		}
+	}
+
+	removeProtocolByHTML(htmlProtocol) {
+		// Find related protocol in the protocols array
+		var foundProtocol = this.protocols.find(protocol => htmlProtocol.is( '#' + protocol.id));
+
+		if(foundProtocol != null) {
+			this.removeProtocol(foundProtocol);
+		}
 	}
 
 	generateHTML() {
@@ -44,10 +118,12 @@ class Layer {
 	    });
 
 	    if(this.protocols.length == 0) {
-	    	this.html.append( '<div class="col emptyLayer">' + this.type + ' layer</div>' )
+	    	this.html.append( '<div class="col emptyLayer">' + this.type + ' layer</div>' );
 	    } else {
 	    	this.protocols.forEach(protocol => this.html.append( protocol.html ));	
 	    }
+
+	    makeLayerDroppable(this);
 	}
 }
 
