@@ -49,3 +49,9 @@ body {
 .component .interface {
 	border: 0;
 }
+
+/* DATA VISUALIZATION AND SIMULATION CONTROLS */
+
+#dataVisualizer {
+	min-height: 5%;
+}
