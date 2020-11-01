@@ -7,7 +7,7 @@ function makeInterfaceClickable(interfaceReference) {
     interfaceReference.html.click(function() {
     	//interfaceReference.interfaceClick();
     	if(currentlyLinkingInterfaces) {
-    		// Delete current link if it exists
+    		// Completely delete current link if it exists
     		if(interfaceReference.link2 != null) {
     			deleteLink(interfaceReference);
     		}
@@ -23,7 +23,7 @@ function makeInterfaceClickable(interfaceReference) {
 
 			currentlyLinkingInterfaces = false;
     	} else {
-    		// Delete current link if it exists
+    		// Completely delete current link if it exists
     		if(interfaceReference.link2 != null) {
     			deleteLink(interfaceReference);
     		}
@@ -44,12 +44,21 @@ function drawLink(interfaceReference) {
 	}
 }
 
-function deleteLink(interfaceReference) {
+function eraseLink(interfaceReference) {
 	if(interfaceReference.link2 != null) {
 		var link1 = '#' + interfaceReference.link1;
-		var link2 = '#' + interfaceReference.link2.link1;
 
 		$(link1).connections('remove');
+	}
+}
+
+function deleteLink(interfaceReference) {
+	if(interfaceReference.link2 != null) {
+		// Erase visible link
+		eraseLink(interfaceReference);
+
+		// Remove link2 reference to current link1
+		interfaceReference.link2.link2 = null;
 	}
 }
 
@@ -86,7 +95,8 @@ class Interface {
 
 	redrawLink() {
 		if(this.link2 != null) {
-			deleteLink(this);
+			// Simply erase the link without removing references
+			eraseLink(this);
 			drawLink(this);
 		}
 	}
