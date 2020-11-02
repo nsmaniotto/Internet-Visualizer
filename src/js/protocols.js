@@ -56,11 +56,11 @@ class Protocol {
 	}
 
 	encapsulate(message) {
-		var data = {
-		  'head': {'layer':this.layer, 'protocol': this.type}, 
-		  'encapsulate': message,
-		  'tail': null
-		};
+		var data = new ProtocolData(this.id, this.type);
+
+		data.header = this.generateHeader();
+
+		data.encapsulatedData = message;
 
 		return data;
 	}
@@ -72,6 +72,10 @@ class TCP extends Protocol {
 
 		this.generateHTML();
 	}
+
+	generateHeader() {
+		return '';
+	}
 }
 
 class UDP extends Protocol {
@@ -79,6 +83,10 @@ class UDP extends Protocol {
 		super("UDP");
 
 		this.generateHTML();
+	}
+
+	generateHeader() {
+		return '';
 	}
 }
 
@@ -88,6 +96,10 @@ class IP extends Protocol {
 
 		this.generateHTML();
 	}
+
+	generateHeader() {
+		return '';
+	}
 }
 
 class ARP extends Protocol {
@@ -95,5 +107,9 @@ class ARP extends Protocol {
 		super("ARP");
 
 		this.generateHTML();
+	}
+
+	generateHeader() {
+		return '';
 	}
 }
