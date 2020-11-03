@@ -1,3 +1,5 @@
+var componentsCounter = 0;
+
 function makeComponentDraggable(component) {
 	component.html.draggable({
 		containment: "#sandbox",
@@ -17,14 +19,29 @@ class Component {
 	constructor(componentType) {
 		this.type = componentType;
 		this.name = "unnamed_" + this.type;
+		this.id = this.generateComponentId();
 		this.layers = new Array();
 		this.interfaces = new Array();
 		this.html = null;
 	}
 
+	generateComponentId() {
+		var newId = 'component' + componentsCounter;
+
+		componentsCounter++;
+
+		return newId;
+	}
+
 	init() {
 		this.initLayers();
 		this.initInterfaces();
+
+		var componentReference = this;
+		
+		$( '#GENERATEDATATEST' ).click(function () {
+			componentReference.generateData();
+		});
 	}
 
 	initLayers() {
@@ -88,6 +105,7 @@ class Component {
 
 	generateHTML() {
 		this.html = $('<div/>', {
+			'id': this.id,
 	        'class': 'component ' + this.type + ' d-inline-block'
 	    });
 
@@ -109,11 +127,19 @@ class Component {
 	}
 
 	generateData() {
-		var data = "message";
+		console.log('//////// GENERATING DATA ////////');
+
+		var data = new ComponentData(this.id, this.type);
+
+		var dataToTransmit = "message";
 
 		this.layers.forEach((layer, index, array) => {
-		    data = layer.encapsulate(data);
+		    dataToTransmit = layer.encapsulate(dataToTransmit);
 		});
+
+		data.encapsulatedData = dataToTransmit;
+
+		data.show();
 
 		return data;
 	}
@@ -126,8 +152,6 @@ class Host extends Component {
 		this.name = name;
 
 		this.init();
-
-		this.generateData();
 
 		this.generateHTML();
 	}
