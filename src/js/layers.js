@@ -1,3 +1,5 @@
+var layersCounter = 0;
+
 function makeLayerDroppable(layer) {
 	layer.html.droppable({
 		accept: ".protocol",
@@ -44,6 +46,8 @@ class Layer {
 	constructor(layerType) {
 		this.type = layerType;
 
+		this.id = this.generateLayerId();
+
 		this.dataName = null;
 
 		this.protocols = new Array();
@@ -70,6 +74,14 @@ class Layer {
 			default:
 				break;
 		}
+	}
+
+	generateLayerId() {
+		var newId = 'layer' + layersCounter;
+
+		layersCounter++;
+
+		return newId;
 	}
 
 	addProtocol(protocol) {
@@ -114,6 +126,7 @@ class Layer {
 
 	generateHTML() {
 		this.html = $('<div/>', {
+			'id': this.id,
 	        'class': 'row layer ' + this.type + 'Layer'
 	    });
 
@@ -135,11 +148,10 @@ class ApplicationLayer extends Layer {
 	}
 
 	encapsulate(message) {
-		var data = {
-		  'head': {'layer':'application', 'protocol': null}, 
-		  'encapsulate': message,
-		  'tail': null
-		};
+		var data = new LayerData(this.id, this.type);
+
+		data.encapsulatedData = message;
+		data.type = this.dataName;
 
 		return data;
 	}
@@ -153,17 +165,15 @@ class TransportLayer extends Layer {
 	}
 
 	encapsulate(data) {
-		var segment = null;
+		var segment = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
-			segment = this.protocols[0].encapsulate(data);
+			segment.encapsulatedData = this.protocols[0].encapsulate(data);
 		} else {
-			segment = {
-			  'head': {'layer':'transport', 'protocol': null}, 
-			  'encapsulate': data,
-			  'tail': null
-			};
+			segment.encapsulatedData = data;
 		}
+
+		segment.type = this.dataName;
 
 		return segment;
 	}
@@ -177,17 +187,15 @@ class NetworkLayer extends Layer {
 	}
 
 	encapsulate(segment) {
-		var packet = null;
+		var packet = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
-			packet = this.protocols[0].encapsulate(segment);
+			packet.encapsulatedData = this.protocols[0].encapsulate(data);
 		} else {
-			packet = {
-			  'head': {'layer':'network', 'protocol': null}, 
-			  'encapsulate': segment,
-			  'tail': null
-			};
+			packet.encapsulatedData = segment;
 		}
+
+		packet.type = this.dataName;
 
 		return packet;
 	}
@@ -201,17 +209,15 @@ class DataLinkLayer extends Layer {
 	}
 
 	encapsulate(packet) {
-		var frame = null;
+		var frame = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
-			frame = this.protocols[0].encapsulate(packet);
+			frame.encapsulatedData = this.protocols[0].encapsulate(data);
 		} else {
-			frame = {
-			  'head': {'layer':'data link', 'protocol': null}, 
-			  'encapsulate': packet,
-			  'tail': null
-			};
+			frame.encapsulatedData = packet;
 		}
+
+		frame.type = this.dataName;
 
 		return frame;
 	}
@@ -225,17 +231,15 @@ class PhysicalLayer extends Layer {
 	}
 
 	encapsulate(frame) {
-		var bits = null;
+		var bits = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
-			bits = this.protocols[0].encapsulate(frame);
+			bits.encapsulatedData = this.protocols[0].encapsulate(data);
 		} else {
-			bits = {
-			  'head': {'layer':'physical', 'protocol': null}, 
-			  'encapsulate': frame,
-			  'tail': null
-			};
+			bits.encapsulatedData = frame;
 		}
+
+		bits.type = this.dataName;
 
 		return bits;
 	}
