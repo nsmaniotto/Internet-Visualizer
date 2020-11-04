@@ -190,7 +190,7 @@ class NetworkLayer extends Layer {
 		var packet = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
-			packet.encapsulatedData = this.protocols[0].encapsulate(data);
+			packet.encapsulatedData = this.protocols[0].encapsulate(segment);
 		} else {
 			packet.encapsulatedData = segment;
 		}
