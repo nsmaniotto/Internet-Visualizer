@@ -72,21 +72,25 @@ class Layer {
 		}
 	}
 
-	addProtocol(protocol) {
-		var alreadyExists = false;
+	addProtocol(newProtocol) {
+		var existingProtocol = null;
+
+		existingProtocol = this.protocols.find(element => element.type == newProtocol.type);
 
 		if(this.protocols.length == 0) {
 			this.html.find( '.emptyLayer' ).remove();
 		} else {
-			if((this.protocols.find(existingProtocol => existingProtocol.type == protocol.type)) != null) {
-				alreadyExists = true;
-			}
+			existingProtocol = this.protocols.find(element => element.type == newProtocol.type);
 		}
 		
-		if(!alreadyExists) {
-			this.html.append(protocol.html);
+		if(existingProtocol != null) {
+			this.html.append(newProtocol.html);
+			this.protocols.push(newProtocol);
+		} else {
+			// Replace existingProtocol by the newProtocol
+			this.removeProtocol(existingProtocol);
 
-			this.protocols.push(protocol);
+			this.addProtocol(newProtocol);
 		}
 	}
 
