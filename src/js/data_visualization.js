@@ -8,13 +8,15 @@ class Data {
 		this.encapsulatorType = encapsulatorType; // Component, Layer or Protocol
 		this.specificType = specificType; // host, switch, ..., application, transport, ..., TCP, UDP, ...
 
+		this.complementaryInformation = null;
+
 		this.header = null;
 		this.encapsulatedData = null;
 		this.type = null;
 	}
 
 	show() {
-		console.log('[' + this.encapsulatorType + '] ' + this.encapsulatorReference + ' (' + this.specificType + ') --> ' + this.header + ' : ' + this.encapsulatedData + ' (' + this.type + ').');
+		console.log('(' + this.complementaryInformation + ') [' + this.encapsulatorType + '] ' + this.encapsulatorReference + ' (' + this.specificType + ') --> ' + this.header + ' : ' + this.encapsulatedData + ' (' + this.type + ').');
 
 		if(this.encapsulatedData != null && this.encapsulatedData != '' && this.encapsulatedData != 'message') {
 			this.encapsulatedData.show();
