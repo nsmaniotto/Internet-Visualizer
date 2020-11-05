@@ -62,6 +62,8 @@ class Protocol {
 
 		data.encapsulatedData = message;
 
+		data.complementaryInformation = "N/A";
+
 		return data;
 	}
 }

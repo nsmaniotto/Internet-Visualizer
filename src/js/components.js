@@ -139,6 +139,8 @@ class Component {
 
 		data.encapsulatedData = dataToTransmit;
 
+		data.complementaryInformation = "N/A";
+
 		data.show();
 
 		return data;

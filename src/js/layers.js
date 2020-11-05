@@ -153,6 +153,8 @@ class ApplicationLayer extends Layer {
 		data.encapsulatedData = message;
 		data.type = this.dataName;
 
+		data.complementaryInformation = "N/A";
+
 		return data;
 	}
 }
@@ -174,6 +176,8 @@ class TransportLayer extends Layer {
 		}
 
 		segment.type = this.dataName;
+
+		segment.complementaryInformation = "N/A";
 
 		return segment;
 	}
@@ -197,6 +201,8 @@ class NetworkLayer extends Layer {
 
 		packet.type = this.dataName;
 
+		packet.complementaryInformation = "N/A";
+
 		return packet;
 	}
 }
@@ -219,6 +225,8 @@ class DataLinkLayer extends Layer {
 
 		frame.type = this.dataName;
 
+		frame.complementaryInformation = "N/A";
+
 		return frame;
 	}
 }
@@ -240,6 +248,8 @@ class PhysicalLayer extends Layer {
 		}
 
 		bits.type = this.dataName;
+
+		bits.complementaryInformation = "N/A";
 
 		return bits;
 	}
