@@ -36,12 +36,6 @@ class Component {
 	init() {
 		this.initLayers();
 		this.initInterfaces();
-
-		var componentReference = this;
-		
-		$( '#GENERATEDATATEST' ).click(function () {
-			componentReference.generateData();
-		});
 	}
 
 	initLayers() {
