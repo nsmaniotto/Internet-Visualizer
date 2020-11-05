@@ -16,11 +16,73 @@ class Data {
 	}
 
 	show() {
-		console.log('(' + this.complementaryInformation + ') [' + this.encapsulatorType + '] ' + this.encapsulatorReference + ' (' + this.specificType + ') --> ' + this.header + ' : ' + this.encapsulatedData + ' (' + this.type + ').');
+		var htmlInformation = this.generationInformationHTML();
+		var htmlData = this.generationDataHTML();
+	    
+		dataInformationsDiv.html(htmlInformation);
+		dataDiv.html(htmlData);
 
-		if(this.encapsulatedData != null && this.encapsulatedData != '' && this.encapsulatedData != 'message') {
-			this.encapsulatedData.show();
+		if(this.encapsulatedData != null && this.type != 'data') {
+			var tempEncapsulatedData = this.encapsulatedData;
+			setTimeout(function() {
+		    	tempEncapsulatedData.show();
+			}, 2000);
 		}
+	}
+
+	generationInformationHTML() {
+		var html = 'Information : ' + this.complementaryInformation;
+
+		return html;
+	}
+
+	generationDataHTML() {
+		var html = $('<div/>', {
+			'class': 'row'
+		});
+
+		// Initialize shown data type
+		var htmlDataType = $('<div/>', {
+			'id': 'dataType',
+	        'class': 'col ' + this.type
+	    });
+	    htmlDataType.append(this.type);
+
+	    // Initialize shown header and encapsulated data as a table
+	    var htmlDataTable = $('<table/>', {
+			'id': 'dataTable',
+	        'class': 'col ' + this.type
+	    });
+
+	    var htmlDataRow = $('<tr/>', {
+	    	'class' : 'dataRow'
+	    });
+	    var htmlDataHeaderCol = $('<td/>', {
+	        'class': 'dataCol header'
+	    });
+	    htmlDataHeaderCol.append(this.header);
+	    var htmlDataEncapsulatedDataCol = $('<td/>', {
+	        'class': 'dataCol encapsulatedData'
+	    });
+
+	    var shownEncapsulatedData = this.encapsulatedData;
+
+	    if(this.type != null && this.type != 'data') {
+	    	shownEncapsulatedData = 'Encapsulated ' + this.encapsulatedData.type;
+	    }
+
+	    htmlDataEncapsulatedDataCol.append(shownEncapsulatedData);
+
+	    htmlDataRow.append(htmlDataHeaderCol);
+	    htmlDataRow.append(htmlDataEncapsulatedDataCol);
+	    htmlDataTable.append(htmlDataRow);
+
+
+	    html.append(htmlDataType);
+	    html.append(htmlDataTable);
+
+
+		return html;
 	}
 }
 
