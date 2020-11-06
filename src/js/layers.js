@@ -75,15 +75,13 @@ class Layer {
 	addProtocol(newProtocol) {
 		var existingProtocol = null;
 
-		existingProtocol = this.protocols.find(element => element.type == newProtocol.type);
-
 		if(this.protocols.length == 0) {
 			this.html.find( '.emptyLayer' ).remove();
 		} else {
 			existingProtocol = this.protocols.find(element => element.type == newProtocol.type);
 		}
 		
-		if(existingProtocol != null) {
+		if(existingProtocol == null) {
 			this.html.append(newProtocol.html);
 			this.protocols.push(newProtocol);
 		} else {
