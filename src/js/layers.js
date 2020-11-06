@@ -86,15 +86,20 @@ class Layer {
 			this.protocols.push(newProtocol);
 		} else {
 			// Replace existingProtocol by the newProtocol
-			this.removeProtocol(existingProtocol);
+			this.removeProtocol(existingProtocol, true);
 
 			this.addProtocol(newProtocol);
 		}
 	}
 
-	removeProtocol(protocol) {
+	removeProtocol(protocol, removeHtml) {
 		// Find related protocol index in the protocols array
 		var foundProtocolIndex = this.protocols.indexOf(protocol);
+
+		// Remove protocol div if required
+		if(removeHtml) {
+			protocol.html.remove();
+		}
 
 		// Remove protocol from array
 		this.protocols.splice(foundProtocolIndex, 1);
@@ -110,7 +115,7 @@ class Layer {
 		var foundProtocol = this.protocols.find(protocol => htmlProtocol.is( '#' + protocol.id));
 
 		if(foundProtocol != null) {
-			this.removeProtocol(foundProtocol);
+			this.removeProtocol(foundProtocol, false);
 		}
 	}
 
