@@ -9,8 +9,9 @@ function sandboxResize() {
 	var bodyHeight = $('body').height();
 	var bodyWidth = $('body').width();
 	var navHeight = $('#navbarDiv').height();
+	var dataVisualizerHeight = $('#dataVisualizer').height();
 
-	$('#sandbox').height(bodyHeight - navHeight - 10);
+	$('#sandbox').height(bodyHeight - navHeight - dataVisualizerHeight - 10);
 }
 
 window.onresize = sandboxResize;
