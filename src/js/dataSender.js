@@ -53,7 +53,15 @@ class DataSender {
 		    row.append(destinationHostsList);
 
 		    // Start simulation button
-		    row.append('<button id="sendDataButton" type="button" class="btn btn-secondary form-control">Start simulation</button>');
+		    var startSimulationButton = $('<button/>', {
+				'id': 'startSimulationButton',
+				'type': 'button',
+				'class': 'btn btn-secondary form-control'
+		    });
+		    startSimulationButton.append('Start simulation');
+		    startSimulationButton.click(function() { DataSender.instance.send() });
+
+		    row.append(startSimulationButton);
 
 		    dataSender.append(row);
 
@@ -82,6 +90,10 @@ class DataSender {
 
 		$('#sourceHostsList').html(optionList);
 		$('#destinationHostsList').html(optionList);
+	}
+
+	send() {
+		
 	}
 
 }
