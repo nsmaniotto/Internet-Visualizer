@@ -63,7 +63,11 @@ class DataSender {
 	}
 
 	generateHostsOptionList() {
-		return '<option>test</option>';
+		var hostsOptionList = "";
+
+		this.hostsList.forEach(host => hostsOptionList = hostsOptionList + '<option>' + host.name + '</option>');
+		
+		return hostsOptionList;
 	}
 
 	addNewComponentToHosts() {
