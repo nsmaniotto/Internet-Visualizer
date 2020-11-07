@@ -70,12 +70,18 @@ class DataSender {
 		return hostsOptionList;
 	}
 
-	addNewComponentToHosts() {
+	addHost(newHost) {
+		this.hostsList.push(newHost);
 
+		// Regenerate html destination and source pickers
+		this.updatePickers();
 	}
 
-	removeComponentFromHosts() {
+	updatePickers() {
+		var optionList = this.generateHostsOptionList();
 
+		$('#sourceHostsList').html(optionList);
+		$('#destinationHostsList').html(optionList);
 	}
 
 }
