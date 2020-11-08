@@ -120,12 +120,8 @@ class Component {
 		makeComponentDraggable(this);
 	}
 
-	generateData() {
-		console.log('//////// GENERATING DATA ////////');
-
+	generateData(dataToTransmit) {
 		var data = new ComponentData(this.id, this.type);
-
-		var dataToTransmit = "message";
 
 		this.layers.forEach((layer, index, array) => {
 		    dataToTransmit = layer.encapsulate(dataToTransmit);
@@ -134,8 +130,6 @@ class Component {
 		data.encapsulatedData = dataToTransmit;
 
 		data.complementaryInformation = "N/A";
-
-		data.show();
 
 		return data;
 	}
