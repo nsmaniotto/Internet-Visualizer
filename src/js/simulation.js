@@ -8,7 +8,9 @@ class Simulation {
 	}
 
 	start(source, destination, message) {
-		console.log(source.name + " -> " + destination.name + " : " + message);
+		var datas = source.generateData(message);
+
+		datas.show();
 	}
 
 }
