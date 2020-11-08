@@ -73,7 +73,9 @@ class DataSender {
 	generateHostsOptionList() {
 		var hostsOptionList = "";
 
-		this.hostsList.forEach(host => hostsOptionList = hostsOptionList + '<option>' + host.name + '</option>');
+		this.hostsList.forEach((host, index, array) => {
+		    hostsOptionList = hostsOptionList + '<option value="'+index+'">' + host.name + '</option>';
+		});
 		
 		return hostsOptionList;
 	}
@@ -93,7 +95,27 @@ class DataSender {
 	}
 
 	send() {
-		
+		var sourcePosition = $('#sourceHostsList').val();
+		var destinationPosition = $('#destinationHostsList').val();
+
+		if(sourcePosition != null && destinationPosition != null) {
+			var message = $('#messageInput').val();
+
+			if(message == "") {
+				message = "ping";
+			}
+
+			var source = this.hostsList[sourcePosition];
+			var destination = this.hostsList[destinationPosition];
+
+			if(source != null && destination != null && sourcePosition != destinationPosition) {
+				simulation.start(source, destination, message);
+			} else {
+				// ERROR : Invalid or same source and destination
+			}
+		} else {
+			// ERROR : You need to add host before starting a simulation
+		}
 	}
 
 }
