@@ -21,13 +21,6 @@ class Data {
 	    
 		dataInformationsDiv.html(htmlInformation);
 		dataDiv.html(htmlData);
-
-		if(this.encapsulatedData != null && this.type != 'data') {
-			var tempEncapsulatedData = this.encapsulatedData;
-			setTimeout(function() {
-		    	tempEncapsulatedData.show();
-			}, 2000);
-		}
 	}
 
 	generationInformationHTML() {
