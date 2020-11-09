@@ -15,6 +15,7 @@ class Simulation {
 		this.datas = source.generateData(message);
 
 		this.isRunning = true;
+		$('#simulationControlPlayPause').html('Pause');
 
 		this.show(this.datas);
 	}
@@ -36,6 +37,7 @@ class Simulation {
 			// Simulation has ended
 			this.isRunning = false;
 			this.currentStep = 0;
+			$('#simulationControlPlayPause').html('Play');
 		}
 	}
 
@@ -56,6 +58,7 @@ class Simulation {
 	        'class': 'btn btn-secondary'
 	    });
 	    playPauseButton.html('Play');
+	    playPauseButton.click(function() { Simulation.instance.playPause() });
 	    simulationControls.append(playPauseButton);
 
 	    var nextButton = $('<button/>', {
@@ -72,8 +75,10 @@ class Simulation {
 		if(this.currentStep != 0) {
 			if(this.isRunning) {
 				this.isRunning = false;
+				$('#simulationControlPlayPause').html('Play');
 			} else {
 				this.isRunning = true;
+				$('#simulationControlPlayPause').html('Pause');
 
 				this.start(this.currentStep);
 			}
