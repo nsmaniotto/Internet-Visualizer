@@ -3,15 +3,40 @@ class Simulation {
 		if(! Simulation.instance){
 			Simulation.instance = this;
 			this.generateHTML();
+			this.datas = null;
+			this.isRunning = false;
+			this.currentStep = 0;
 		}
 
 		return Simulation.instance;
 	}
 
 	start(source, destination, message) {
-		var datas = source.generateData(message);
+		this.datas = source.generateData(message);
 
-		datas.show();
+		this.isRunning = true;
+
+		this.show(this.datas);
+	}
+
+	show(data) {
+		if(data != null) {
+			data.show();
+			this.currentStep++;
+		}
+
+		if(data.encapsulatedData != null && data.type != 'data') {
+			var tempEncapsulatedData = data.encapsulatedData;
+			setTimeout(function() {
+				if(Simulation.instance.isRunning) {
+		    		Simulation.instance.show(tempEncapsulatedData);
+		    	}
+			}, 2000);
+		} else {
+			// Simulation has ended
+			this.isRunning = false;
+			this.currentStep = 0;
+		}
 	}
 
 	generateHTML() {
