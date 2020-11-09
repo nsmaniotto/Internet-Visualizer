@@ -66,6 +66,19 @@ class Simulation {
 	    nextButton.html('Next');
 	    simulationControls.append(nextButton);
 	}
+
+	playPause() {
+		// Prevent from changing status when there is no ongoing simulation
+		if(this.currentStep != 0) {
+			if(this.isRunning) {
+				this.isRunning = false;
+			} else {
+				this.isRunning = true;
+
+				this.start(this.currentStep);
+			}
+		}
+	}
 }
 
 var simulation = new Simulation();
