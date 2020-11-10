@@ -50,6 +50,7 @@ class Simulation {
 	        'class': 'btn btn-secondary'
 	    });
 	    previousButton.html('Previous');
+	    previousButton.click(function() { Simulation.instance.previous() });
 	    simulationControls.append(previousButton);
 
 	    var playPauseButton = $('<button/>', {
@@ -67,6 +68,7 @@ class Simulation {
 	        'class': 'btn btn-secondary'
 	    });
 	    nextButton.html('Next');
+	    nextButton.click(function() { Simulation.instance.next() });
 	    simulationControls.append(nextButton);
 	}
 
@@ -86,7 +88,7 @@ class Simulation {
 	}
 
 	previous() {
-		
+
 	}
 
 	next() {
