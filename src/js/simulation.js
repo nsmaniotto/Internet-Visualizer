@@ -84,6 +84,14 @@ class Simulation {
 			}
 		}
 	}
+
+	previous() {
+		
+	}
+
+	next() {
+
+	}
 }
 
 var simulation = new Simulation();
