@@ -76,12 +76,16 @@ class Simulation {
 		// Prevent from changing status when there is no ongoing simulation
 		if(this.currentStep != 0) {
 			if(this.isRunning) {
-				this.isRunning = false;
-				$('#simulationControlPlayPause').html('Play');
+				this.pause();
 			} else {
 				this.unpause();
 			}
 		}
+	}
+
+	pause() {
+		this.isRunning = false;
+		$('#simulationControlPlayPause').html('Play');
 	}
 
 	unpause() {
