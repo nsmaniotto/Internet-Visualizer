@@ -79,11 +79,24 @@ class Simulation {
 				this.isRunning = false;
 				$('#simulationControlPlayPause').html('Play');
 			} else {
-				this.isRunning = true;
-				$('#simulationControlPlayPause').html('Pause');
-
-				this.start(this.currentStep);
+				this.unpause();
 			}
+		}
+	}
+
+	unpause() {
+		this.isRunning = true;
+		$('#simulationControlPlayPause').html('Pause');
+
+		if(this.datas != null)
+		{
+			var data = this.datas;
+
+			for(var i = 1 ; i < this.currentStep; i++) {
+				data = data.encapsulatedData;
+			}
+
+			this.show(data);
 		}
 	}
 
