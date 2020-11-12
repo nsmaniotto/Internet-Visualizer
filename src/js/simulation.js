@@ -101,7 +101,16 @@ class Simulation {
 	}
 
 	previous() {
+		if(this.datas != null && this.currentStep > 0)
+		{
+			var data = this.datas;
 
+			for(var i = 1 ; i < this.currentStep - 1; i++) {
+				data = data.encapsulatedData;
+			}
+
+			this.show(data);
+		}
 	}
 
 	next() {
