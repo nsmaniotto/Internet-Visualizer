@@ -114,6 +114,7 @@ class Simulation {
 			}
 
 			this.show(data);
+			this.pause();
 		}
 	}
 
