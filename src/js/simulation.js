@@ -108,13 +108,15 @@ class Simulation {
 	}
 
 	previous() {
-		if(this.datas != null && this.currentStep > 0)
+		if(this.datas != null && this.currentStep > 1)
 		{
 			var data = this.datas;
 
-			for(var i = 1 ; i < this.currentStep - 1; i++) {
+			for(var i = 0 ; i < this.currentStep - 2; i++) {
 				data = data.encapsulatedData;
 			}
+
+			this.currentStep -= 2;
 
 			this.show(data);
 			this.pause();
