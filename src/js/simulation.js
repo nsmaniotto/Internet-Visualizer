@@ -5,6 +5,7 @@ class Simulation {
 			this.generateHTML();
 			this.datas = null;
 			this.isRunning = false;
+			this.currentData = null;
 			this.currentStep = 0;
 		}
 
@@ -23,6 +24,7 @@ class Simulation {
 	show(data) {
 		if(data != null) {
 			data.show();
+			this.currentData = data;
 			this.currentStep++;
 		}
 
@@ -36,6 +38,7 @@ class Simulation {
 		} else {
 			// Simulation has ended
 			this.isRunning = false;
+			this.currentData = null;
 			this.currentStep = 0;
 			$('#simulationControlPlayPause').html('Play');
 		}
@@ -92,7 +95,7 @@ class Simulation {
 		this.isRunning = true;
 		$('#simulationControlPlayPause').html('Pause');
 
-		if(this.datas != null)
+		if(this.currentData != null)
 		{
 			var data = this.datas;
 
@@ -119,7 +122,7 @@ class Simulation {
 	}
 
 	next() {
-
+		
 	}
 }
 
