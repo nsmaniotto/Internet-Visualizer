@@ -108,7 +108,7 @@ class Simulation {
 	}
 
 	previous() {
-		if(this.datas != null && this.currentStep > 1)
+		if(this.currentData != null && this.currentStep > 1)
 		{
 			var data = this.datas;
 
