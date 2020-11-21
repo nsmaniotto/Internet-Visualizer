@@ -84,6 +84,14 @@ class Layer {
 		return generatedData;
 	}
 
+	decapsulate(data) {
+		var generatedData = this.specificDecapsulate(data);
+
+		simulation.datas.push(generatedData);
+
+		return generatedData;
+	}
+
 	generateLayerId() {
 		var newId = 'layer' + layersCounter;
 
@@ -172,6 +180,10 @@ class ApplicationLayer extends Layer {
 
 		return data;
 	}
+
+	specificDecapsulate(data) {
+
+	}
 }
 
 class TransportLayer extends Layer {
@@ -195,6 +207,11 @@ class TransportLayer extends Layer {
 		segment.complementaryInformation = "N/A";
 
 		return segment;
+	}
+
+	specificDecapsulate(segment) {
+		// TODO
+		return null;
 	}
 }
 
@@ -220,6 +237,11 @@ class NetworkLayer extends Layer {
 
 		return packet;
 	}
+
+	specificDecapsulate(packet) {
+		// TODO
+		return null;
+	}
 }
 
 class DataLinkLayer extends Layer {
@@ -244,6 +266,11 @@ class DataLinkLayer extends Layer {
 
 		return frame;
 	}
+
+	specificDecapsulate(frame) {
+		// TODO
+		return null;
+	}
 }
 
 class PhysicalLayer extends Layer {
@@ -267,5 +294,10 @@ class PhysicalLayer extends Layer {
 		bits.complementaryInformation = "N/A";
 
 		return bits;
+	}
+
+	specificDecapsulate(bits) {
+		// TODO
+		return null;
 	}
 }
