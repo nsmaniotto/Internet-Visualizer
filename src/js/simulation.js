@@ -28,7 +28,7 @@ class Simulation {
 			this.currentStep++;
 		}
 
-		if(this.currentStep < this.datas.length) {
+		if(this.currentStep < this.datas.length - 1) {
 			setTimeout(function() {
 				if(Simulation.instance.isRunning) {
 		    		Simulation.instance.show();
