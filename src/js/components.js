@@ -131,7 +131,7 @@ class Component {
 		    		tempData = array[i].encapsulate(tempData);
 		    	}
 
-		    	// TODO : Send tempData to aquire needed response and informations
+		    	// Send tempData to aquire needed response and informations
 		    	this.send(tempData);
 
 		    	dataToTransmit = layer.encapsulate(dataToTransmit);

@@ -76,6 +76,12 @@ class Layer {
 		}
 	}
 
+	encapsulate(data) {
+		var generatedData = this.specificEncapsulate(data);
+
+		simulation.datas.push(generatedData);
+	}
+
 	generateLayerId() {
 		var newId = 'layer' + layersCounter;
 
@@ -154,7 +160,7 @@ class ApplicationLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(message) {
+	specificEncapsulate(message) {
 		var data = new LayerData(this.id, this.type);
 
 		data.encapsulatedData = message;
@@ -173,7 +179,7 @@ class TransportLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(data) {
+	specificEncapsulate(data) {
 		var segment = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -197,7 +203,7 @@ class NetworkLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(segment) {
+	specificEncapsulate(segment) {
 		var packet = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -221,7 +227,7 @@ class DataLinkLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(packet) {
+	specificEncapsulate(packet) {
 		var frame = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -245,7 +251,7 @@ class PhysicalLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(frame) {
+	specificEncapsulate(frame) {
 		var bits = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
