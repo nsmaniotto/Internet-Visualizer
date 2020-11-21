@@ -132,7 +132,8 @@ class Component {
 		    	}
 
 		    	// TODO : Send tempData to aquire needed response and informations
-
+		    	var response = this.send(tempData);
+		    	this.receive(response);
 
 		    	dataToTransmit = layer.encapsulate(dataToTransmit);
 		    } else {
@@ -145,6 +146,30 @@ class Component {
 		data.complementaryInformation = "N/A";
 
 		return data;
+	}
+
+	send(dataToTransmit) {
+		var interfaceName = "eth0";
+		var interfaceToUse = null; // 'interface' keyword is forbidden
+		var destination = null;
+		var response = null;
+
+		// TODO : Determine whom to send the data
+		// get the destination address
+		// get the corresponding interface
+
+		// Retrieve the component which is linked to this interface
+		interfaceToUse = this.interfaces.find(element => element.name == interfaceName);
+
+		if(interfaceToUse != null) {
+			destination = interfaceToUse.link2;
+
+			if(destination != null) {
+				response = destination.receive(dataToTransmit);
+			}
+		}
+
+		return response;
 	}
 }
 
