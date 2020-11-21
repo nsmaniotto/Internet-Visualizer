@@ -141,6 +141,8 @@ class Component {
 		    }
 		});
 
+		this.send(dataToTransmit);
+
 		data.encapsulatedData = dataToTransmit;
 
 		data.complementaryInformation = "N/A";
@@ -170,6 +172,16 @@ class Component {
 		}
 
 		return response;
+	}
+
+	receive(receivedData) {
+		while(receivedData != null) {
+			i++;
+
+			if(receivedData.encapsulatedData != null && receivedData.encapsulatedData.type != 'data') {
+				receivedData = this.layers[this.layers.length - i].decapsulate(receivedData);
+			}
+		}
 	}
 }
 
