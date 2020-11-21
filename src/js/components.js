@@ -124,7 +124,20 @@ class Component {
 		var data = new ComponentData(this.id, this.type);
 
 		this.layers.forEach((layer, index, array) => {
-		    dataToTransmit = layer.encapsulate(dataToTransmit);
+		    var tempData = layer.encapsulate(dataToTransmit);
+
+		    if(tempData.awaitingResponse) {
+		    	for(var i = index + 1; i < array.length; i++) {
+		    		tempData = array[i].encapsulate(tempData);
+		    	}
+
+		    	// TODO : Send tempData to aquire needed response and informations
+
+
+		    	dataToTransmit = layer.encapsulate(dataToTransmit);
+		    } else {
+		    	dataToTransmit = tempData;
+		    }
 		});
 
 		data.encapsulatedData = dataToTransmit;

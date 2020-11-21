@@ -13,6 +13,8 @@ class Data {
 		this.header = null;
 		this.encapsulatedData = null;
 		this.type = null;
+
+		this.awaitingResponse = false;
 	}
 
 	show() {
