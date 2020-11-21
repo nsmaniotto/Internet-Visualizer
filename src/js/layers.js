@@ -80,6 +80,8 @@ class Layer {
 		var generatedData = this.specificEncapsulate(data);
 
 		simulation.datas.push(generatedData);
+
+		return generatedData;
 	}
 
 	generateLayerId() {
