@@ -36,6 +36,8 @@ class Component {
 	init() {
 		this.initLayers();
 		this.initInterfaces();
+
+		componentsList.push(this); // Every component must be added to this list in order to be reached later
 	}
 
 	initLayers() {
@@ -161,8 +163,8 @@ class Component {
 		// Retrieve the component which is linked to this interface
 		interfaceToUse = this.interfaces.find(element => element.name == interfaceName);
 
-		if(interfaceToUse != null) {
-			destination = interfaceToUse.link2;
+		if(interfaceToUse != null && interfaceToUse.link2 != null) {
+			destination = componentsList.find(element => element.hasInterface(interfaceToUse));
 
 			if(destination != null) {
 				destination.receive(dataToTransmit);
@@ -171,6 +173,8 @@ class Component {
 	}
 
 	receive(receivedData) {
+		var i = 0;
+
 		while(receivedData != null) {
 			i++;
 
@@ -178,6 +182,10 @@ class Component {
 				receivedData = this.layers[this.layers.length - i].decapsulate(receivedData);
 			}
 		}
+	}
+
+	hasInterface(interf) {
+		return (this.interfaces.find(element => element.link1 == interf.link2.link1) != null);
 	}
 }
 
