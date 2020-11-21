@@ -132,8 +132,7 @@ class Component {
 		    	}
 
 		    	// TODO : Send tempData to aquire needed response and informations
-		    	var response = this.send(tempData);
-		    	this.receive(response);
+		    	this.send(tempData);
 
 		    	dataToTransmit = layer.encapsulate(dataToTransmit);
 		    } else {
@@ -154,7 +153,6 @@ class Component {
 		var interfaceName = "eth0";
 		var interfaceToUse = null; // 'interface' keyword is forbidden
 		var destination = null;
-		var response = null;
 
 		// TODO : Determine whom to send the data
 		// get the destination address
@@ -167,11 +165,9 @@ class Component {
 			destination = interfaceToUse.link2;
 
 			if(destination != null) {
-				response = destination.receive(dataToTransmit);
+				destination.receive(dataToTransmit);
 			}
 		}
-
-		return response;
 	}
 
 	receive(receivedData) {
