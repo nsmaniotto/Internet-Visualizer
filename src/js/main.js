@@ -16,3 +16,5 @@ var destinationInterface = null;
 
 var layersCounter = 0;
 
+var protocolsCounter = 0;
+
