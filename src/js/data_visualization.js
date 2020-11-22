@@ -97,6 +97,15 @@ class LayerData extends Data {
 	constructor(encapsulatorReference, specificType) {
 		super(encapsulatorReference, 'layer', specificType);
 	}
+
+	drawActiveStyle() {
+		super.drawActiveStyle();
+
+		// Check if a specific protocol is used and make it active
+		if(this.encapsulatedData.encapsulatorType == "protocol") {
+			this.encapsulatedData.drawActiveStyle();
+		}
+	}
 }
 
 class ProtocolData extends Data {

@@ -78,3 +78,9 @@ body {
 	border-color: green;
     border-style: double;
 }
+
+.active.protocol {
+	font-weight: bold;
+	color: green;
+    border-style: inherit;
+}
