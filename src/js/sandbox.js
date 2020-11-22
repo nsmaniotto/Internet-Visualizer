@@ -13,7 +13,3 @@ function sandboxResize() {
 
 	$('#sandbox').height(bodyHeight - navHeight - dataVisualizerHeight - 10);
 }
-
-window.onresize = sandboxResize;
-
-sandboxResize();

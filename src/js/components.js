@@ -1,5 +1,3 @@
-var componentsCounter = 0;
-
 function makeComponentDraggable(component) {
 	component.html.draggable({
 		containment: "#sandbox",

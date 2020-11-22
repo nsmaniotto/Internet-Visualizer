@@ -1,5 +1,3 @@
-var protocolsCounter = 0;
-
 function makeProtocolDraggable(protocol) {
 	protocol.html.draggable({
 		containment: "#sandbox",

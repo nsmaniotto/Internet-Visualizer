@@ -119,5 +119,3 @@ class DataSender {
 	}
 
 }
-
-var dataSender = new DataSender('#sandbox');

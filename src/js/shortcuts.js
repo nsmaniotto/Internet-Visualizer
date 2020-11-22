@@ -1,18 +1,12 @@
-// Define shortcuts' behaviour
-var sandboxDiv = $( "#sandbox" );
+function initComponentsShortcuts() {
+	shortcutAddHost.click(function() { addHost() });
 
-var shortcutAddHost = $( "#shortcutAddHost" );
-var shortcutAddHub = $( "#shortcutAddHub" );
-var shortcutAddSwitch = $( "#shortcutAddSwitch" );
-var shortcutAddRouter = $( "#shortcutAddRouter" );
+	shortcutAddHub.click(function() { addHub() });
 
-shortcutAddHost.click(function() { addHost() });
+	shortcutAddSwitch.click(function() { addSwitch() });
 
-shortcutAddHub.click(function() { addHub() });
-
-shortcutAddSwitch.click(function() { addSwitch() });
-
-shortcutAddRouter.click(function() { addRouter() });
+	shortcutAddRouter.click(function() { addRouter() });
+}
 
 function addHost() {
 	// Ask for the host name
@@ -112,5 +106,3 @@ function createIPShortcut () {
 
 	$('#shortcutAddProtocolIP').append(tempProtocolHTML);
 }
-
-createProtocolShortcuts();
