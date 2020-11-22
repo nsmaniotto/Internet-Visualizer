@@ -75,6 +75,15 @@ class Data {
 
 		return html;
 	}
+
+	drawActiveStyle() {
+		// Retrieve element associated to the data and apply active style
+		$( "#" + this.encapsulatorReference ).addClass( "active" );
+	}
+	
+	clearActiveStyle() {
+		$( "#" + this.encapsulatorReference ).removeClass( "active" );
+	}
 }
 
 

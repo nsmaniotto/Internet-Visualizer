@@ -23,6 +23,9 @@ class Simulation {
 
 	show() {
 		if(this.datas != null) {
+			if(this.currentData != null) {
+				this.currentData.clearActiveStyle();
+			}
 			this.currentData = this.datas[this.currentStep];
 			this.currentData.show();
 			this.currentStep++;

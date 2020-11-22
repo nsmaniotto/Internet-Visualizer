@@ -72,3 +72,9 @@ body {
 	width: auto;
     margin: 10px;
 }
+
+/* SANDBOX DATA ASSOCIATED ELEMENT VISUALIZATION */
+.active.layer {
+	border-color: green;
+    border-style: double;
+}
