@@ -25,3 +25,12 @@ window.onresize = sandboxResize;
 sandboxResize();
 
 var simulation = new Simulation();
+
+var sandboxDiv = $( "#sandbox" );
+
+var shortcutAddHost = $( "#shortcutAddHost" );
+var shortcutAddHub = $( "#shortcutAddHub" );
+var shortcutAddSwitch = $( "#shortcutAddSwitch" );
+var shortcutAddRouter = $( "#shortcutAddRouter" );
+
+createProtocolShortcuts();
