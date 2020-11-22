@@ -1,5 +1,3 @@
-var layersCounter = 0;
-
 function makeLayerDroppable(layer) {
 	layer.html.droppable({
 		accept: ".protocol",

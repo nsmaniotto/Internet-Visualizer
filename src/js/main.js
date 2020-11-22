@@ -14,3 +14,5 @@ var currentlyLinkingInterfaces = false;
 var sourceInterface = null;
 var destinationInterface = null;
 
+var layersCounter = 0;
+
