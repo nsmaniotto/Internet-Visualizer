@@ -23,3 +23,5 @@ var protocolsCounter = 0;
 window.onresize = sandboxResize;
 
 sandboxResize();
+
+var simulation = new Simulation();

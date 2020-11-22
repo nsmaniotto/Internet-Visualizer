@@ -124,5 +124,3 @@ class Simulation {
 		}
 	}
 }
-
-var simulation = new Simulation();
