@@ -6,6 +6,8 @@ The goal of this web application is to illustrate how networks work by gradually
 
 Within this interactive app, users will be able to play around with what contains a real network in order to slowly understand, thanks to popularized concepts, how hosts (computers, smartphones, printers, etc.) can communicate.
 
+Try it now at [nsmaniotto.github.io/Internet-Visualizer/](https://nsmaniotto.github.io/Internet-Visualizer/)
+
 
 ## v1.2.0 features:
 
@@ -27,7 +29,5 @@ Within this interactive app, users will be able to play around with what contain
 ## Planned improvements and features:
 
 - Implementation of protocols' behaviour
-- Ability to send messages from an host to a certain destination
-- Ability to see transmitted datas in 'real time' (slowed)
-- Ability to see transmitted datas step by step
 - Improve overall design
+- New components
