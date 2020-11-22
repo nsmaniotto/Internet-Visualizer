@@ -1,7 +1,3 @@
-var dataInformationsDiv = $('#dataInformations');
-var dataDiv = $('#data');
-var simulationControlsDiv = $('#simulationControls');
-
 class Data {
 	constructor(encapsulatorReference, encapsulatorType, specificType) {
 		this.encapsulatorReference = encapsulatorReference; // ID of the component/layer/protocol
