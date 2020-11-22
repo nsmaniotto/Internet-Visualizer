@@ -25,6 +25,9 @@ function addHost() {
 
 	// Create a new host instance with the name
 	var newHost = new Host(hostName);
+
+	// Add the new host to data sender hosts list
+	dataSender.addHost(newHost);
 }
 
 function addHub() {

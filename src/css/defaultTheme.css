@@ -49,3 +49,26 @@ body {
 .component .interface {
 	border: 0;
 }
+
+/* DATA VISUALIZATION AND SIMULATION CONTROLS */
+
+#dataVisualizer {
+	min-height: 5%;
+}
+
+/* DATA SENDER */
+
+#dataSender .row {
+	width: auto;
+	margin: auto;
+	
+	justify-content: center;
+	align-items: center;
+
+	background-color: #c9c9c9;
+}
+
+#dataSender .form-control {
+	width: auto;
+    margin: 10px;
+}
