@@ -14,7 +14,7 @@ class Data {
 		this.encapsulatedData = null;
 		this.type = null;
 
-		this.awaitingResponse = false;
+		this.isSubSequence = false; // i.e. awaiting or sending a response
 	}
 
 	show() {

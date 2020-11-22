@@ -128,7 +128,9 @@ class Component {
 		this.layers.forEach((layer, index, array) => {
 		    var tempData = layer.encapsulate(dataToTransmit);
 
-		    if(tempData.awaitingResponse) {
+		    if(tempData.isSubSequence) {
+		    	tempData.isSubSequence = false;
+		    	
 		    	for(var i = index + 1; i < array.length; i++) {
 		    		tempData = array[i].encapsulate(tempData);
 		    	}
@@ -179,7 +181,22 @@ class Component {
 			i++;
 
 			if(receivedData.encapsulatedData != null && receivedData.encapsulatedData.type != 'data') {
-				receivedData = this.layers[this.layers.length - i].decapsulate(receivedData);
+				var tempData = this.layers[this.layers.length - i].decapsulate(receivedData);
+
+				if(tempData.isSubSequence) {
+					tempData.isSubSequence = false;
+
+			    	for(var j = i; i < this.layers.length; j++) {
+			    		tempData = this.layers[i].encapsulate(tempData);
+			    	}
+
+			    	// Send tempData to aquire needed response and informations
+			    	this.send(tempData);
+
+			    	receivedData = this.layers[this.layers.length - i].decapsulate(receivedData);
+			    } else {
+			    	receivedData = tempData;
+			    }
 			}
 		}
 	}
