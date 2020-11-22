@@ -75,6 +75,15 @@ class Data {
 
 		return html;
 	}
+
+	drawActiveStyle() {
+		// Retrieve element associated to the data and apply active style
+		$( "#" + this.encapsulatorReference ).addClass( "active" );
+	}
+	
+	clearActiveStyle() {
+		$( "#" + this.encapsulatorReference ).removeClass( "active" );
+	}
 }
 
 
@@ -87,6 +96,24 @@ class ComponentData extends Data {
 class LayerData extends Data {
 	constructor(encapsulatorReference, specificType) {
 		super(encapsulatorReference, 'layer', specificType);
+	}
+
+	drawActiveStyle() {
+		super.drawActiveStyle();
+
+		// Check if a specific protocol is used and make it active
+		if(this.encapsulatedData.encapsulatorType == "protocol") {
+			this.encapsulatedData.drawActiveStyle();
+		}
+	}
+
+	clearActiveStyle() {
+		super.clearActiveStyle();
+
+		// Check if a specific protocol is used and make it active
+		if(this.encapsulatedData.encapsulatorType == "protocol") {
+			this.encapsulatedData.clearActiveStyle();
+		}
 	}
 }
 

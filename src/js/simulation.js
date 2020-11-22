@@ -23,7 +23,11 @@ class Simulation {
 
 	show() {
 		if(this.datas != null) {
+			if(this.currentData != null) {
+				this.currentData.clearActiveStyle();
+			}
 			this.currentData = this.datas[this.currentStep];
+			this.currentData.drawActiveStyle();
 			this.currentData.show();
 			this.currentStep++;
 		}
@@ -38,6 +42,7 @@ class Simulation {
 			// Simulation has ended
 			this.datas = new Array();
 			this.isRunning = false;
+			this.currentData.clearActiveStyle();
 			this.currentData = null;
 			this.currentStep = 0;
 			$('#simulationControlPlayPause').html('Play');
