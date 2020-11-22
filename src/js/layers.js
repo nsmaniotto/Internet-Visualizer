@@ -76,6 +76,55 @@ class Layer {
 		}
 	}
 
+	encapsulate(data) {
+		var generatedData = this.specificEncapsulate(data);
+
+		simulation.datas.push(generatedData);
+
+		return generatedData;
+	}
+
+	decapsulate(data) {
+		var generatedData = this.specificDecapsulate(data);
+
+		simulation.datas.push(generatedData);
+
+		return generatedData;
+	}
+
+	specificDecapsulate(data) {
+		var decapsulationResult = data;
+
+		// Check if right layer
+		if(data.specificType == this.type) {
+			// Check if a protocol was used to encapsulate data
+			if(data.encapsulatedData.encapsulatorType == "protocol") {
+				var usedProtocolType = data.encapsulatedData.specificType;
+
+				// Find corresponding protocol
+				var protocol = this.protocols.find(element => element.type == usedProtocolType);
+				
+				if(protocol != null) {
+					// Process data through the corresponding protocol
+					var processResult = protocol.decapsulate(data.encapsulatedData);
+
+					if(processResult.isSubSequence) {
+						processResult.isSubSequence = false;
+
+						decapsulationResult.isSubSequence = true;						
+					}
+				} else {
+					// Abort : missing protocol, cannot process the data
+					decapsulationResult.complementaryInformation = "Missing protocol";
+				}
+			}
+		} else {
+			decapsulationResult.complementaryInformation = "Wrong layer";
+		}
+
+		return decapsulationResult;
+	}
+
 	generateLayerId() {
 		var newId = 'layer' + layersCounter;
 
@@ -154,7 +203,7 @@ class ApplicationLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(message) {
+	specificEncapsulate(message) {
 		var data = new LayerData(this.id, this.type);
 
 		data.encapsulatedData = message;
@@ -173,7 +222,7 @@ class TransportLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(data) {
+	specificEncapsulate(data) {
 		var segment = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -197,7 +246,7 @@ class NetworkLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(segment) {
+	specificEncapsulate(segment) {
 		var packet = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -221,7 +270,7 @@ class DataLinkLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(packet) {
+	specificEncapsulate(packet) {
 		var frame = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {
@@ -245,7 +294,7 @@ class PhysicalLayer extends Layer {
 		this.generateHTML();
 	}
 
-	encapsulate(frame) {
+	specificEncapsulate(frame) {
 		var bits = new LayerData(this.id, this.type);
 
 		if(this.protocols.length != 0) {

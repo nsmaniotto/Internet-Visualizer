@@ -3,7 +3,7 @@ class Simulation {
 		if(! Simulation.instance){
 			Simulation.instance = this;
 			this.generateHTML();
-			this.datas = null;
+			this.datas = new Array();
 			this.isRunning = false;
 			this.currentData = null;
 			this.currentStep = 0;
@@ -13,30 +13,30 @@ class Simulation {
 	}
 
 	start(source, destination, message) {
-		this.datas = source.generateData(message);
+		source.generateData(message);
 
 		this.isRunning = true;
 		$('#simulationControlPlayPause').html('Pause');
 
-		this.show(this.datas);
+		this.show();
 	}
 
-	show(data) {
-		if(data != null) {
-			data.show();
-			this.currentData = data;
+	show() {
+		if(this.datas != null) {
+			this.currentData = this.datas[this.currentStep];
+			this.currentData.show();
 			this.currentStep++;
 		}
 
-		if(data.encapsulatedData != null && data.type != 'data') {
-			var tempEncapsulatedData = data.encapsulatedData;
+		if(this.currentStep < this.datas.length) {
 			setTimeout(function() {
 				if(Simulation.instance.isRunning) {
-		    		Simulation.instance.show(tempEncapsulatedData);
+		    		Simulation.instance.show();
 		    	}
 			}, 2000);
 		} else {
 			// Simulation has ended
+			this.datas = new Array();
 			this.isRunning = false;
 			this.currentData = null;
 			this.currentStep = 0;
@@ -110,27 +110,17 @@ class Simulation {
 	previous() {
 		if(this.currentData != null && this.currentStep > 1)
 		{
-			var data = this.datas;
-
-			for(var i = 0 ; i < this.currentStep - 2; i++) {
-				data = data.encapsulatedData;
-			}
-
 			this.currentStep -= 2;
 
-			this.show(data);
+			this.show();
 			this.pause();
 		}
 	}
 
 	next() {
 		if(this.currentData != null) {
-			var encapsulatedData = this.currentData.encapsulatedData;
-			
-			if(encapsulatedData.encapsulatedData != null) {
-				this.show(encapsulatedData);
-				this.pause();
-			}
+			this.show();
+			this.pause();
 		}
 	}
 }

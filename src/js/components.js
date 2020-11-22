@@ -36,6 +36,8 @@ class Component {
 	init() {
 		this.initLayers();
 		this.initInterfaces();
+
+		componentsList.push(this); // Every component must be added to this list in order to be reached later
 	}
 
 	initLayers() {
@@ -124,14 +126,91 @@ class Component {
 		var data = new ComponentData(this.id, this.type);
 
 		this.layers.forEach((layer, index, array) => {
-		    dataToTransmit = layer.encapsulate(dataToTransmit);
+		    var tempData = layer.encapsulate(dataToTransmit);
+
+		    if(tempData.isSubSequence) {
+		    	tempData.isSubSequence = false;
+
+		    	for(var i = index + 1; i < array.length; i++) {
+		    		tempData = array[i].encapsulate(tempData);
+		    	}
+
+		    	// Send tempData to aquire needed response and informations
+		    	this.send(tempData);
+
+		    	dataToTransmit = layer.encapsulate(dataToTransmit);
+		    } else {
+		    	dataToTransmit = tempData;
+		    }
 		});
+
+		this.send(dataToTransmit);
 
 		data.encapsulatedData = dataToTransmit;
 
 		data.complementaryInformation = "N/A";
 
 		return data;
+	}
+
+	send(dataToTransmit) {
+		var interfaceName = "eth0";
+		var interfaceToUse = null; // 'interface' keyword is forbidden
+		var destination = null;
+
+		// TODO : Determine whom to send the data
+		// get the destination address
+		// get the corresponding interface
+
+		// Retrieve the component which is linked to this interface
+		interfaceToUse = this.interfaces.find(element => element.name == interfaceName);
+
+		if(interfaceToUse != null && interfaceToUse.link2 != null) {
+			destination = componentsList.find(element => element.hasInterface(interfaceToUse));
+
+			if(destination != null) {
+				destination.receive(dataToTransmit);
+			}
+		}
+	}
+
+	receive(receivedData) {
+		var i = 0;
+
+		while(receivedData != null && i < this.layers.length) {
+			if(receivedData.encapsulatorType == "layer") {
+				// Only count layers because we are accessing this.layers[] with i
+				i++;
+			}
+
+			if(receivedData.encapsulatedData != null) {
+				var tempData = this.layers[this.layers.length - i].decapsulate(receivedData);
+
+				if(tempData.isSubSequence) {
+					tempData.isSubSequence = false;
+
+			    	for(var j = i; i < this.layers.length; j++) {
+			    		tempData = this.layers[i].encapsulate(tempData);
+			    	}
+
+			    	// Send tempData to aquire needed response and informations
+			    	this.send(tempData);
+
+			    	receivedData = this.layers[this.layers.length - i].decapsulate(receivedData).encapsulatedData;
+			    } else {
+			    	receivedData = tempData.encapsulatedData;
+			    }
+			}
+
+			if(receivedData.encapsulatorType != "layer") {
+				// Jump to the next layer
+				receivedData = receivedData.encapsulatedData;
+			}
+		}
+	}
+
+	hasInterface(interf) {
+		return (this.interfaces.find(element => element.link1 == interf.link2.link1) != null);
 	}
 }
 

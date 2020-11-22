@@ -66,6 +66,10 @@ class Protocol {
 
 		return data;
 	}
+
+	decapsulate(data) {
+		return data; // TODO : Specific behaviour to be defined
+	}
 }
 
 class TCP extends Protocol {
