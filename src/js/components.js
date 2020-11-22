@@ -130,7 +130,7 @@ class Component {
 
 		    if(tempData.isSubSequence) {
 		    	tempData.isSubSequence = false;
-		    	
+
 		    	for(var i = index + 1; i < array.length; i++) {
 		    		tempData = array[i].encapsulate(tempData);
 		    	}
@@ -177,10 +177,13 @@ class Component {
 	receive(receivedData) {
 		var i = 0;
 
-		while(receivedData != null) {
-			i++;
+		while(receivedData != null && i < this.layers.length) {
+			if(receivedData.encapsulatorType == "layer") {
+				// Only count layers because we are accessing this.layers[] with i
+				i++;
+			}
 
-			if(receivedData.encapsulatedData != null && receivedData.encapsulatedData.type != 'data') {
+			if(receivedData.encapsulatedData != null) {
 				var tempData = this.layers[this.layers.length - i].decapsulate(receivedData);
 
 				if(tempData.isSubSequence) {
@@ -193,10 +196,15 @@ class Component {
 			    	// Send tempData to aquire needed response and informations
 			    	this.send(tempData);
 
-			    	receivedData = this.layers[this.layers.length - i].decapsulate(receivedData);
+			    	receivedData = this.layers[this.layers.length - i].decapsulate(receivedData).encapsulatedData;
 			    } else {
-			    	receivedData = tempData;
+			    	receivedData = tempData.encapsulatedData;
 			    }
+			}
+
+			if(receivedData.encapsulatorType != "layer") {
+				// Jump to the next layer
+				receivedData = receivedData.encapsulatedData;
 			}
 		}
 	}
