@@ -125,12 +125,8 @@ class Simulation {
 
 	next() {
 		if(this.currentData != null) {
-			var encapsulatedData = this.currentData.encapsulatedData;
-			
-			if(encapsulatedData.encapsulatedData != null) {
-				this.show(encapsulatedData);
-				this.pause();
-			}
+			this.show();
+			this.pause();
 		}
 	}
 }
