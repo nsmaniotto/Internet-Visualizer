@@ -6,3 +6,5 @@ var dataInformationsDiv = $('#dataInformations');
 var dataDiv = $('#data');
 var simulationControlsDiv = $('#simulationControls');
 
+
+var dataSender = new DataSender('#sandbox');
