@@ -40,6 +40,8 @@ var interfacesCounter = 0;
 
 window.onresize = sandboxResize;
 
+initComponentsShortcuts();
+
 createProtocolShortcuts();
 
 var simulation = new Simulation();

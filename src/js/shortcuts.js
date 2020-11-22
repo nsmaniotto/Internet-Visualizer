@@ -1,11 +1,12 @@
-// Define shortcuts' behaviour
-shortcutAddHost.click(function() { addHost() });
+function initComponentsShortcuts() {
+	shortcutAddHost.click(function() { addHost() });
 
-shortcutAddHub.click(function() { addHub() });
+	shortcutAddHub.click(function() { addHub() });
 
-shortcutAddSwitch.click(function() { addSwitch() });
+	shortcutAddSwitch.click(function() { addSwitch() });
 
-shortcutAddRouter.click(function() { addRouter() });
+	shortcutAddRouter.click(function() { addRouter() });
+}
 
 function addHost() {
 	// Ask for the host name
