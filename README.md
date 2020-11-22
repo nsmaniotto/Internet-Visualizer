@@ -1,5 +1,5 @@
 
-# Internet-Visualizer v1.1.3
+# Internet-Visualizer v1.2.0
 
 
 The goal of this web application is to illustrate how networks work by gradually implementing features such as layers and protocols.
@@ -7,7 +7,7 @@ The goal of this web application is to illustrate how networks work by gradually
 Within this interactive app, users will be able to play around with what contains a real network in order to slowly understand, thanks to popularized concepts, how hosts (computers, smartphones, printers, etc.) can communicate.
 
 
-## v1.1.3 features:
+## v1.2.0 features:
 
 - User can add
 	- Hosts
@@ -15,9 +15,13 @@ Within this interactive app, users will be able to play around with what contain
 	- Switches
 	- Routers
 
-- User can connect network components through their interfaces
+- Users can connect network components through their interfaces
 
-- User can drag and add protocols to the network components
+- Users can drag and add protocols to the network components
+
+- Users can now start and control (play/pause/etc.) a simulation 
+
+- Users can now visualize transmitted datas in (slowed) real time or step by step
 
 
 ## Planned improvements and features:
