@@ -92,6 +92,39 @@ class Layer {
 		return generatedData;
 	}
 
+	specificDecapsulate(data) {
+		var decapsulationResult = data;
+
+		// Check if right layer
+		if(data.specificType == this.type) {
+			// Check if a protocol was used to encapsulate data
+			if(data.encapsulatedData.encapsulatorType == "protocol") {
+				var usedProtocolType = data.encapsulatedData.specificType;
+
+				// Find corresponding protocol
+				var protocol = this.protocols.find(element => element.type == usedProtocolType);
+				
+				if(protocol != null) {
+					// Process data through the corresponding protocol
+					var processResult = protocol.decapsulate(data.encapsulatedData);
+
+					if(processResult.isSubSequence) {
+						processResult.isSubSequence = false;
+
+						decapsulationResult.isSubSequence = true;						
+					}
+				} else {
+					// Abort : missing protocol, cannot process the data
+					decapsulationResult.complementaryInformation = "Missing protocol";
+				}
+			}
+		} else {
+			decapsulationResult.complementaryInformation = "Wrong layer";
+		}
+
+		return decapsulationResult;
+	}
+
 	generateLayerId() {
 		var newId = 'layer' + layersCounter;
 
@@ -180,10 +213,6 @@ class ApplicationLayer extends Layer {
 
 		return data;
 	}
-
-	specificDecapsulate(data) {
-
-	}
 }
 
 class TransportLayer extends Layer {
@@ -207,11 +236,6 @@ class TransportLayer extends Layer {
 		segment.complementaryInformation = "N/A";
 
 		return segment;
-	}
-
-	specificDecapsulate(segment) {
-		// TODO
-		return null;
 	}
 }
 
@@ -237,11 +261,6 @@ class NetworkLayer extends Layer {
 
 		return packet;
 	}
-
-	specificDecapsulate(packet) {
-		// TODO
-		return null;
-	}
 }
 
 class DataLinkLayer extends Layer {
@@ -266,11 +285,6 @@ class DataLinkLayer extends Layer {
 
 		return frame;
 	}
-
-	specificDecapsulate(frame) {
-		// TODO
-		return null;
-	}
 }
 
 class PhysicalLayer extends Layer {
@@ -294,10 +308,5 @@ class PhysicalLayer extends Layer {
 		bits.complementaryInformation = "N/A";
 
 		return bits;
-	}
-
-	specificDecapsulate(bits) {
-		// TODO
-		return null;
 	}
 }
