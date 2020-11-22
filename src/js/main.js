@@ -18,3 +18,8 @@ var layersCounter = 0;
 
 var protocolsCounter = 0;
 
+
+
+window.onresize = sandboxResize;
+
+sandboxResize();
