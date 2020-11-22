@@ -1,8 +1,3 @@
-var interfacesCounter = 0;
-var currentlyLinkingInterfaces = false;
-var sourceInterface = null;
-var destinationInterface = null;
-
 function makeInterfaceClickable(interfaceReference) {
     interfaceReference.html.click(function() {
     	//interfaceReference.interfaceClick();

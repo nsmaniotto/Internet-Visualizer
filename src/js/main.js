@@ -8,3 +8,9 @@ var simulationControlsDiv = $('#simulationControls');
 
 
 var dataSender = new DataSender('#sandbox');
+
+var interfacesCounter = 0;
+var currentlyLinkingInterfaces = false;
+var sourceInterface = null;
+var destinationInterface = null;
+
