@@ -106,6 +106,15 @@ class LayerData extends Data {
 			this.encapsulatedData.drawActiveStyle();
 		}
 	}
+
+	clearActiveStyle() {
+		super.clearActiveStyle();
+
+		// Check if a specific protocol is used and make it active
+		if(this.encapsulatedData.encapsulatorType == "protocol") {
+			this.encapsulatedData.clearActiveStyle();
+		}
+	}
 }
 
 class ProtocolData extends Data {
