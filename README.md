@@ -1,5 +1,5 @@
 
-# Internet-Visualizer v1.2.0
+# Internet-Visualizer v1.2.1
 
 
 The goal of this web application is to illustrate how networks work by gradually implementing features such as layers and protocols.
@@ -9,7 +9,7 @@ Within this interactive app, users will be able to play around with what contain
 Try it now at [nsmaniotto.github.io/Internet-Visualizer/](https://nsmaniotto.github.io/Internet-Visualizer/)
 
 
-## v1.2.0 features:
+## v1.2.1 features:
 
 - User can add
 	- Hosts
