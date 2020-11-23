@@ -92,18 +92,12 @@ class Simulation {
 	}
 
 	unpause() {
-		this.isRunning = true;
 		$('#simulationControlPlayPause').html('Pause');
 
 		if(this.currentData != null)
 		{
-			var data = this.datas;
-
-			for(var i = 1 ; i < this.currentStep; i++) {
-				data = data.encapsulatedData;
-			}
-
-			this.show(data);
+			this.isRunning = true;
+			this.show();
 		}
 	}
 
